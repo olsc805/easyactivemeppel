@@ -133,6 +133,17 @@
       .les-row { grid-template-columns:56px 1fr; }
       .les-pill { display:none; }
     }
+    .nav-burger { display:none; flex-direction:column; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; padding:4px; flex-shrink:0; }
+    .nav-burger span { width:22px; height:2px; background:#fff; border-radius:2px; display:block; }
+    .nav-mob { display:none; position:fixed; inset:0; z-index:400; background:#090909; flex-direction:column; align-items:center; justify-content:center; }
+    .nav-mob.open { display:flex; }
+    .nav-mob-close { position:absolute; top:22px; right:22px; background:none; border:none; color:rgba(255,255,255,.5); font-size:26px; cursor:pointer; line-height:1; }
+    .nav-mob ul { list-style:none; display:flex; flex-direction:column; align-items:center; margin-bottom:40px; width:100%; }
+    .nav-mob ul li a { display:block; text-align:center; font-size:22px; font-weight:600; color:rgba(255,255,255,.55); padding:13px 0; transition:color .15s; }
+    .nav-mob ul li a:hover, .nav-mob ul li a:active { color:#fff; }
+    .nav-mob-ctas { display:flex; flex-direction:column; gap:10px; width:100%; padding:0 32px; max-width:380px; }
+    .nav-mob-ctas .btn { justify-content:center; padding:15px; font-size:15px; }
+    @media(max-width:768px) { .nav-links{display:none!important} .nav-actions{display:none!important} .nav-burger{display:flex} nav{padding:0 20px} }
   </style>
 </head>
 <body>
@@ -153,7 +164,26 @@
     <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
     <a href="index.html#book" class="btn btn-red">Gratis online gesprek →</a>
   </div>
+  <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+
+<div class="nav-mob" id="navMob">
+  <button class="nav-mob-close" id="navMobClose">✕</button>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#aanbod">Aanbod</a></li>
+    <li><a href="index.html#lessen">Lessen</a></li>
+    <li><a href="rooster.html">Rooster</a></li>
+    <li><a href="index.html#lidmaatschap">Lidmaatschap</a></li>
+    <li><a href="index.html#reviews">Reviews</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-mob-ctas">
+    <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
+    <a href="index.html#book" class="btn btn-red">Gratis online gesprek →</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="pg-hero">
@@ -383,5 +413,6 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.rev-in').forEach(el => io.observe(el));
 </script>
+<script>(function(){var b=document.getElementById('navBurger'),m=document.getElementById('navMob'),c=document.getElementById('navMobClose');if(!b||!m)return;b.addEventListener('click',function(){m.classList.add('open');document.body.style.overflow='hidden';});c.addEventListener('click',function(){m.classList.remove('open');document.body.style.overflow='';});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');document.body.style.overflow='';});});})()</script>
 </body>
 </html>

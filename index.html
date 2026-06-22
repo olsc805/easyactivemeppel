@@ -261,6 +261,24 @@
       .why-grid { grid-template-columns:1fr; }
       .hero-title { letter-spacing:-2px; }
     }
+
+    /* ── MOBILE NAV ── */
+    .nav-burger { display:none; flex-direction:column; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; padding:4px; flex-shrink:0; }
+    .nav-burger span { width:22px; height:2px; background:#fff; border-radius:2px; display:block; }
+    .nav-mob { display:none; position:fixed; inset:0; z-index:400; background:#090909; flex-direction:column; align-items:center; justify-content:center; }
+    .nav-mob.open { display:flex; }
+    .nav-mob-close { position:absolute; top:22px; right:22px; background:none; border:none; color:rgba(255,255,255,.5); font-size:26px; cursor:pointer; line-height:1; }
+    .nav-mob ul { list-style:none; display:flex; flex-direction:column; align-items:center; margin-bottom:40px; width:100%; }
+    .nav-mob ul li a { display:block; text-align:center; font-size:22px; font-weight:600; color:rgba(255,255,255,.55); padding:13px 0; transition:color .15s; }
+    .nav-mob ul li a:hover, .nav-mob ul li a:active { color:#fff; }
+    .nav-mob-ctas { display:flex; flex-direction:column; gap:10px; width:100%; padding:0 32px; max-width:380px; }
+    .nav-mob-ctas .btn { justify-content:center; padding:15px; font-size:15px; }
+    @media(max-width:768px) {
+      .nav-links { display:none !important; }
+      .nav-actions { display:none !important; }
+      .nav-burger { display:flex; }
+      nav { padding:0 20px; }
+    }
   </style>
 </head>
 <body>
@@ -284,7 +302,28 @@
     <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
     <a href="#book" class="btn btn-red">Gratis online gesprek →</a>
   </div>
+  <button class="nav-burger" id="navBurger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mob" id="navMob">
+  <button class="nav-mob-close" id="navMobClose">✕</button>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#aanbod">Aanbod</a></li>
+    <li><a href="#lessen">Lessen</a></li>
+    <li><a href="rooster.html">Rooster</a></li>
+    <li><a href="#lidmaatschap">Lidmaatschap</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-mob-ctas">
+    <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
+    <a href="#book" class="btn btn-red">Gratis online gesprek →</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -627,7 +666,7 @@
             <div class="cal-icon">📅</div>
             <h3>Kies een datum</h3>
             <p>Selecteer een moment dat jou uitkomt. Duurt ca. 20 minuten op locatie.</p>
-            <a href="https://calendly.com/JOUW_CALENDLY_URL" target="_blank" class="btn btn-red btn-lg" id="cal-btn">Open de agenda →</a>
+            <a href="https://calendly.com/easymeppelwebsite/30min" target="_blank" class="btn btn-red btn-lg" id="cal-btn">Open de agenda →</a>
           </div>
           <div class="cal-note">🔒 Je gegevens worden alleen gebruikt voor het plannen van je afspraak</div>
         </div>
@@ -834,7 +873,7 @@
   }
 
   // Calendly live swap
-  const CAL_URL = ''; // ← Voeg jouw Calendly URL hier in
+  const CAL_URL = 'https://calendly.com/easymeppelwebsite/30min';
   if(CAL_URL) {
     document.getElementById('cal-wrap').innerHTML =
       `<div class="calendly-inline-widget" data-url="${CAL_URL}" style="min-width:320px;height:680px;"></div>`;
@@ -842,6 +881,15 @@
     s.src = 'https://assets.calendly.com/assets/external/widget.js';
     s.async = true; document.body.appendChild(s);
   }
+</script>
+<script>
+(function(){
+  var b=document.getElementById('navBurger'),m=document.getElementById('navMob'),c=document.getElementById('navMobClose');
+  if(!b||!m)return;
+  b.addEventListener('click',function(){m.classList.add('open');document.body.style.overflow='hidden';});
+  c.addEventListener('click',function(){m.classList.remove('open');document.body.style.overflow='';});
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');document.body.style.overflow='';});});
+})();
 </script>
 </body>
 </html>
