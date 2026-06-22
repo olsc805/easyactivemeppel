@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yoga &amp; Dans — EasyActive Meppel</title>
+  <meta name="description" content="Yoga, Yin Yoga, Body Balance, Streetdance en HipHop bij EasyActive Meppel. Voor alle leeftijden en niveaus. Inbegrepen bij lidmaatschap." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black:#090909; --g900:#111; --g800:#1a1a1a; --g700:#242424; --g200:#999; --g100:#ccc; --white:#fff; --red:#D02828; --redlo:rgba(208,40,40,.1); }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; line-height:1; }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; max-width:100%; }
+    .btn { display:inline-flex; align-items:center; gap:7px; padding:11px 22px; border-radius:4px; font-size:13px; font-weight:700; cursor:pointer; transition:all .18s; border:none; font-family:inherit; }
+    .btn-red { background:var(--red); color:#fff; } .btn-red:hover { background:#b52020; }
+    .btn-ghost { background:transparent; color:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.14); } .btn-ghost:hover { background:rgba(255,255,255,.05); color:#fff; }
+    .btn-lg { padding:14px 30px; font-size:15px; border-radius:5px; }
+    .wrap { max-width:1240px; margin:0 auto; padding:0 48px; }
+    .sec-tag { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--red); margin-bottom:16px; }
+    .sec-tag::before { content:''; width:18px; height:1.5px; background:var(--red); }
+    .sec-h { font-size:clamp(34px,4vw,56px); font-weight:900; letter-spacing:-2px; line-height:1.02; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:300; padding:0 48px; height:68px; display:flex; align-items:center; justify-content:space-between; background:rgba(9,9,9,.94); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.05); }
+    .nav-logo img { height:34px; filter:invert(1); }
+    .nav-links { position:absolute; left:50%; transform:translateX(-50%); display:flex; gap:16px; list-style:none; }
+    .nav-links a { font-size:13px; font-weight:500; color:rgba(255,255,255,.6); transition:color .15s; } .nav-links a:hover { color:#fff; }
+    .nav-actions { display:flex; gap:8px; align-items:center; }
+    .pg-hero { padding:140px 0 80px; position:relative; overflow:hidden; }
+    .pg-hero-bg { position:absolute; inset:0; background:linear-gradient(135deg, rgba(208,40,40,.06) 0%, transparent 50%), linear-gradient(to bottom, var(--g900) 0%, var(--black) 100%); }
+    .pg-hero-content { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .pg-tag { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(208,40,40,.3); background:rgba(208,40,40,.08); color:#e07070; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:20px; }
+    .pg-title { font-size:clamp(44px,6vw,80px); font-weight:900; letter-spacing:-3px; line-height:.95; margin-bottom:18px; }
+    .pg-title em { font-style:normal; color:var(--red); }
+    .pg-sub { font-size:16px; color:var(--g200); line-height:1.7; max-width:460px; margin-bottom:30px; }
+    .pg-hero-img { border-radius:4px; overflow:hidden; }
+    .pg-hero-img img { width:100%; aspect-ratio:4/3; object-fit:cover; filter:brightness(.75) saturate(.75); }
+    /* CLASSES */
+    .lessen { padding:80px 0; background:var(--g900); }
+    .les-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:44px; }
+    .les-card { background:var(--g800); padding:36px 32px; }
+    .les-icon { font-size:32px; margin-bottom:14px; }
+    .les-type { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--red); margin-bottom:8px; display:block; }
+    .les-card h3 { font-size:20px; font-weight:800; letter-spacing:-.3px; margin-bottom:10px; }
+    .les-card p { font-size:14px; color:var(--g200); line-height:1.75; }
+    .les-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+    .les-tag { font-size:10px; font-weight:700; background:rgba(255,255,255,.06); color:rgba(255,255,255,.5); padding:4px 9px; border-radius:3px; }
+    /* BENEFITS */
+    .benefits { padding:80px 0; background:var(--black); }
+    .ben-inner { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:44px; }
+    .ben-card { background:var(--g900); padding:28px 24px; border-top:2px solid rgba(208,40,40,.3); }
+    .ben-icon { font-size:24px; margin-bottom:14px; }
+    .ben-card h3 { font-size:15px; font-weight:800; margin-bottom:8px; }
+    .ben-card p { font-size:13px; color:var(--g200); line-height:1.65; }
+    /* SCHEDULE */
+    .sched { padding:80px 0; background:var(--g900); }
+    .sched-note { margin-top:16px; display:inline-flex; align-items:center; gap:9px; font-size:13px; color:var(--g200); }
+    .sched-note span { color:var(--red); font-weight:700; }
+    .sched-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:36px; }
+    .sched-card { background:var(--g800); padding:24px 22px; border-top:2px solid var(--red); }
+    .sched-les { font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--red); margin-bottom:6px; }
+    .sched-dag { font-size:18px; font-weight:800; margin-bottom:3px; }
+    .sched-tijd { font-size:14px; color:var(--g200); }
+    .sub-cta { padding:80px 0; background:var(--black); text-align:center; }
+    .sub-cta h2 { font-size:clamp(34px,4vw,52px); font-weight:900; letter-spacing:-2px; margin-bottom:12px; }
+    .sub-cta p { font-size:16px; color:var(--g200); margin-bottom:32px; }
+    .sub-cta .ctas { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+    .foot-mini { background:var(--black); border-top:1px solid rgba(255,255,255,.05); padding:28px 0; }
+    .foot-mini .wrap { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--g200); flex-wrap:wrap; gap:10px; }
+    .foot-mini a { color:var(--g200); } .foot-mini a:hover { color:#fff; }
+    .rev-in { opacity:0; transform:translateY(18px); transition:opacity .5s, transform .5s; }
+    .rev-in.vis { opacity:1; transform:translateY(0); }
+    @media(max-width:900px) { .wrap{padding:0 20px} nav{padding:0 20px} .pg-hero-content{grid-template-columns:1fr} .les-grid{grid-template-columns:1fr} .ben-inner{grid-template-columns:1fr 1fr} .sched-grid{grid-template-columns:1fr 1fr} }
+    @media(max-width:600px) { .ben-inner{grid-template-columns:1fr} .sched-grid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo"><img src="https://static.wixstatic.com/media/4ea3c4_a9af118e2d174731b91fdeb6dca0a89b~mv2.png" alt="EasyActive Meppel" /></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#aanbod">Aanbod</a></li>
+    <li><a href="../index.html#lessen">Lessen</a></li>
+    <li><a href="../rooster.html">Rooster</a></li>
+    <li><a href="../index.html#lidmaatschap">Lidmaatschap</a></li>
+    <li><a href="../index.html#reviews">Reviews</a></li>
+    <li><a href="../index.html#faq">FAQ</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
+    <a href="../index.html#book" class="btn btn-red">Gratis online gesprek →</a>
+  </div>
+</nav>
+
+<section class="pg-hero">
+  <div class="pg-hero-bg"></div>
+  <div class="wrap">
+    <div class="pg-hero-content">
+      <div>
+        <h1 class="pg-title">Yoga<br />&amp; <em>Dans</em></h1>
+        <p class="pg-sub">Van diep ontspannende Yin Yoga tot energiek streetdancen — EasyActive biedt meer dan kracht en conditie. Balans, soepelheid en plezier zijn ook een sport.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="../index.html#book" class="btn btn-red btn-lg">Gratis online gesprek →</a>
+          <a href="https://www.healthplanner.nl/reservation/13/ojEzo5==" target="_blank" class="btn btn-ghost btn-lg">Gratis proefles inplannen</a>
+          <a href="https://easyactive.nl/aanbod-easyactive/" target="_blank" class="btn btn-ghost btn-lg">Rooster bekijken</a>
+        </div>
+      </div>
+      <div class="pg-hero-img rev-in">
+        <img src="https://static.wixstatic.com/media/4ea3c4_46d05ea516504dc187dda390d3735ec4~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80,enc_avif,quality_auto/4ea3c4_46d05ea516504dc187dda390d3735ec4~mv2.jpg" alt="Yoga EasyActive Meppel" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lessen">
+  <div class="wrap">
+    <div class="sec-tag">Lessen</div>
+    <h2 class="sec-h rev-in">Wat bieden we aan?</h2>
+    <div class="les-grid">
+      <div class="les-card rev-in">
+        <div class="les-icon">🧘</div>
+        <span class="les-type">Mind &amp; Body</span>
+        <h3>Yoga</h3>
+        <p>Klassieke yoga met aandacht voor ademhaling, houding en bewustzijn. Je hoeft geen yogi te zijn — beginners zijn meer dan welkom.</p>
+        <div class="les-tags"><span class="les-tag">Alle niveaus</span><span class="les-tag">Flexibiliteit</span><span class="les-tag">Ontspanning</span></div>
+      </div>
+      <div class="les-card rev-in">
+        <div class="les-icon">🌙</div>
+        <span class="les-type">Deep stretch</span>
+        <h3>Yin Yoga</h3>
+        <p>Langzame, diepe houdingen die bindweefsel en gewrichten aanpakken. Ideaal als hersteldag of aanvulling op intensieve training.</p>
+        <div class="les-tags"><span class="les-tag">Herstel</span><span class="les-tag">Diepe stretch</span><span class="les-tag">Rust</span></div>
+      </div>
+      <div class="les-card rev-in">
+        <div class="les-icon">⚖️</div>
+        <span class="les-type">Les Mills</span>
+        <h3>Body Balance</h3>
+        <p>Een mix van yoga, tai chi en pilates. Body Balance is dé Les Mills les voor wie kracht, soepelheid en innerlijke rust combineert.</p>
+        <div class="les-tags"><span class="les-tag">Les Mills</span><span class="les-tag">Kracht</span><span class="les-tag">Balance</span></div>
+      </div>
+      <div class="les-card rev-in">
+        <div class="les-icon">🕺</div>
+        <span class="les-type">Dans</span>
+        <h3>Streetdance &amp; HipHop</h3>
+        <p>Streetdance voor kinderen (6–8 en 9–12 jaar) en HipHop voor tieners en volwassenen (13+). Bewegen op muziek — energiek, sociaal, toegankelijk.</p>
+        <div class="les-tags"><span class="les-tag">6+ jaar</span><span class="les-tag">Dans</span><span class="les-tag">Sociaal</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="wrap">
+    <div class="sec-tag">Waarom yoga &amp; dans</div>
+    <h2 class="sec-h rev-in">Meer dan alleen spieren.</h2>
+    <div class="ben-inner">
+      <div class="ben-card rev-in">
+        <div class="ben-icon">🧠</div>
+        <h3>Mentale rust</h3>
+        <p>Yoga en Yin Yoga verlagen cortisol, verbeteren slaap en helpen bij stressverwerking. Net zo belangrijk als fysieke training.</p>
+      </div>
+      <div class="ben-card rev-in">
+        <div class="ben-icon">💪</div>
+        <h3>Betere prestaties in de gym</h3>
+        <p>Flexibiliteit en mobiliteit zijn de basis van krachtig bewegen. Body Balance maakt je bewegingspatroon efficiënter — ook op de gewichten.</p>
+      </div>
+      <div class="ben-card rev-in">
+        <div class="ben-icon">😊</div>
+        <h3>Plezier als motivatie</h3>
+        <p>Dansen is bewegen zonder het 'trainen' te voelen. Streetdance en HipHop zijn populair voor een reden — ze zijn gewoon leuk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sched">
+  <div class="wrap">
+    <div class="sec-tag">Rooster voorbeelden</div>
+    <h2 class="sec-h rev-in">Wanneer?</h2>
+    <p class="sched-note">Het actuele rooster vind je via de <span>Sportivity app</span> of op de website van EasyActive.</p>
+    <div class="sched-grid">
+      <div class="sched-card rev-in">
+        <div class="sched-les">Yoga</div>
+        <div class="sched-dag">Meerdere momenten</div>
+        <div class="sched-tijd">Ochtend &amp; avond · zie app</div>
+      </div>
+      <div class="sched-card rev-in">
+        <div class="sched-les">Yin Yoga</div>
+        <div class="sched-dag">Wekelijks</div>
+        <div class="sched-tijd">Avond · rustige sessie</div>
+      </div>
+      <div class="sched-card rev-in">
+        <div class="sched-les">Body Balance</div>
+        <div class="sched-dag">Les Mills format</div>
+        <div class="sched-tijd">Zie weekrooster in app</div>
+      </div>
+      <div class="sched-card rev-in">
+        <div class="sched-les">Streetdance (6–8 jr)</div>
+        <div class="sched-dag">Wekelijks</div>
+        <div class="sched-tijd">Middag of vroege avond</div>
+      </div>
+      <div class="sched-card rev-in">
+        <div class="sched-les">Streetdance (9–12 jr)</div>
+        <div class="sched-dag">Wekelijks</div>
+        <div class="sched-tijd">Na schooltijd</div>
+      </div>
+      <div class="sched-card rev-in">
+        <div class="sched-les">HipHop (13+)</div>
+        <div class="sched-dag">Wekelijks</div>
+        <div class="sched-tijd">Avond · energie gegarandeerd</div>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:12px;color:var(--g200)">Exacte tijden en beschikbaarheid via de Sportivity app of <a href="https://easyactive.nl/aanbod-easyactive/" target="_blank" style="color:var(--g100);border-bottom:1px solid rgba(255,255,255,.2)">easyactive.nl</a></p>
+  </div>
+</section>
+
+<div class="sub-cta">
+  <div class="wrap">
+    <h2 class="rev-in">Doe een gratis proefles.</h2>
+    <p class="rev-in">Kies een les en kom langs — geen verplichting.</p>
+    <div class="ctas rev-in">
+      <a href="../index.html#book" class="btn btn-red btn-lg">Gratis online gesprek →</a>
+      <a href="../index.html#lidmaatschap" class="btn btn-ghost btn-lg">Bekijk lidmaatschappen</a>
+    </div>
+  </div>
+</div>
+
+<footer class="foot-mini">
+  <div class="wrap">
+    <span>© 2025 EasyActive Meppel · Paradijsweg 8, Meppel · <a href="tel:0522244114">0522 244 114</a></span>
+    <a href="../index.html">← Terug naar de homepage</a>
+  </div>
+</footer>
+<script>
+  const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);} }), {threshold:.08});
+  document.querySelectorAll('.rev-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

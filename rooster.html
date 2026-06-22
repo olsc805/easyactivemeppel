@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groepslesrooster — EasyActive Meppel</title>
+  <meta name="description" content="Volledig groepslesrooster van EasyActive Meppel. Yoga, RPM, boksen, karate, dans, 30Active en meer — 7 dagen per week." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black:#090909; --g900:#111; --g800:#1a1a1a; --g700:#242424; --g500:#3a3a3a; --g200:#999; --g100:#ccc; --white:#fff; --red:#D02828; --redlo:rgba(208,40,40,.1); }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; line-height:1; }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; max-width:100%; }
+    .btn { display:inline-flex; align-items:center; gap:7px; padding:11px 22px; border-radius:4px; font-size:13px; font-weight:700; cursor:pointer; transition:all .18s; border:none; font-family:inherit; letter-spacing:.01em; }
+    .btn-red { background:var(--red); color:#fff; } .btn-red:hover { background:#b52020; }
+    .btn-ghost { background:transparent; color:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.14); } .btn-ghost:hover { background:rgba(255,255,255,.05); color:#fff; }
+    .btn-lg { padding:14px 30px; font-size:15px; border-radius:5px; }
+    .wrap { max-width:1240px; margin:0 auto; padding:0 48px; }
+    .sec-tag { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--red); margin-bottom:16px; }
+    .sec-tag::before { content:''; width:18px; height:1.5px; background:var(--red); }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:300; padding:0 48px; height:68px; display:flex; align-items:center; justify-content:space-between; background:rgba(9,9,9,.94); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.05); }
+    .nav-logo img { height:34px; filter:invert(1); }
+    .nav-links { position:absolute; left:50%; transform:translateX(-50%); display:flex; gap:16px; list-style:none; }
+    .nav-links a { font-size:13px; font-weight:500; color:rgba(255,255,255,.6); transition:color .15s; } .nav-links a:hover { color:#fff; }
+    .nav-links a.active { color:#fff; }
+    .nav-actions { display:flex; gap:8px; align-items:center; }
+
+    /* HERO */
+    .pg-hero { padding:140px 0 72px; background:linear-gradient(135deg, rgba(208,40,40,.07) 0%, transparent 50%), linear-gradient(to bottom, var(--g900) 0%, var(--black) 100%); }
+    .pg-tag { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(208,40,40,.3); background:rgba(208,40,40,.08); color:#e07070; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:20px; }
+    .pg-title { font-size:clamp(44px,6vw,80px); font-weight:900; letter-spacing:-3px; line-height:.95; margin-bottom:16px; }
+    .pg-title em { font-style:normal; color:var(--red); }
+    .pg-sub { font-size:16px; color:var(--g200); line-height:1.7; max-width:560px; margin-bottom:28px; }
+
+    /* LEGEND */
+    .legend { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+    .leg-item { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600; color:var(--g200); }
+    .leg-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+    /* DAY TABS */
+    .rooster-section { padding:64px 0 96px; }
+    .day-tabs { display:flex; gap:4px; margin-bottom:32px; flex-wrap:wrap; }
+    .day-btn {
+      padding:10px 20px; border-radius:4px; font-size:13px; font-weight:700; cursor:pointer;
+      border:1px solid rgba(255,255,255,.1); background:var(--g900); color:rgba(255,255,255,.5);
+      transition:all .15s; font-family:inherit; letter-spacing:.01em;
+    }
+    .day-btn:hover { color:#fff; border-color:rgba(255,255,255,.2); }
+    .day-btn.active { background:var(--red); color:#fff; border-color:var(--red); }
+    .day-btn.today { border-color:var(--red); color:var(--red); }
+    .day-btn.today.active { color:#fff; }
+
+    /* SCHEDULE GRID */
+    .les-panel { display:none; }
+    .les-panel.visible { display:block; }
+    .les-count { font-size:12px; color:var(--g200); margin-bottom:20px; }
+    .les-count span { color:#fff; font-weight:600; }
+
+    .les-list { display:flex; flex-direction:column; gap:2px; }
+    .les-row {
+      display:grid; grid-template-columns:72px 1fr auto 80px;
+      align-items:center; gap:16px;
+      background:var(--g900); padding:16px 20px;
+      border-left:3px solid transparent;
+      transition:background .15s;
+    }
+    .les-row:hover { background:var(--g800); }
+    .les-row.cat-yoga { border-left-color:#4a9d8a; }
+    .les-row.cat-spinning { border-left-color:#c8902a; }
+    .les-row.cat-dans { border-left-color:#6060c8; }
+    .les-row.cat-boks { border-left-color:var(--red); }
+    .les-row.cat-karate { border-left-color:#c87830; }
+    .les-row.cat-small { border-left-color:#3a9a5a; }
+    .les-row.cat-sport { border-left-color:var(--g500); }
+
+    .les-time { font-size:18px; font-weight:500; letter-spacing:0; color:var(--g200); }
+    .les-info .les-name { font-size:14px; font-weight:600; margin-bottom:3px; }
+    .les-info .les-note { font-size:11px; color:var(--g200); }
+    .les-pill {
+      font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+      padding:3px 8px; border-radius:3px; white-space:nowrap;
+    }
+    .pill-yoga { background:rgba(74,157,138,.15); color:#4a9d8a; }
+    .pill-spinning { background:rgba(200,144,42,.15); color:#c8902a; }
+    .pill-dans { background:rgba(96,96,200,.15); color:#9090e0; }
+    .pill-boks { background:rgba(208,40,40,.15); color:#e07070; }
+    .pill-karate { background:rgba(200,120,48,.15); color:#c87830; }
+    .pill-small { background:rgba(58,154,90,.15); color:#3a9a5a; }
+    .pill-sport { background:rgba(90,90,90,.2); color:var(--g200); }
+
+    .les-zaal { font-size:11px; font-weight:400; color:var(--g200); text-align:right; white-space:nowrap; }
+    .zaal-badge { display:inline-flex; align-items:center; gap:4px; background:var(--g800); border:1px solid rgba(255,255,255,.08); border-radius:3px; padding:3px 8px; font-size:11px; font-weight:400; }
+
+    /* TIME DIVIDER */
+    .time-group { display:flex; flex-direction:column; gap:2px; margin-bottom:2px; }
+    .time-group + .time-group { margin-top:8px; }
+
+    /* ZALEN INFO */
+    .zalen-info { padding:48px 0; background:var(--g900); border-top:1px solid rgba(255,255,255,.05); }
+    .zalen-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:32px; }
+    .zaal-card { background:var(--g800); padding:28px 24px; border-top:2px solid var(--red); }
+    .zaal-num { font-size:32px; font-weight:900; color:var(--red); letter-spacing:-1px; margin-bottom:8px; }
+    .zaal-card h3 { font-size:15px; font-weight:800; margin-bottom:6px; }
+    .zaal-card p { font-size:13px; color:var(--g200); line-height:1.65; }
+
+    /* CTA */
+    .sub-cta { padding:80px 0; background:var(--black); text-align:center; }
+    .sub-cta h2 { font-size:clamp(32px,4vw,50px); font-weight:900; letter-spacing:-2px; margin-bottom:12px; }
+    .sub-cta p { font-size:16px; color:var(--g200); margin-bottom:32px; }
+    .sub-cta .ctas { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+
+    /* FOOTER MINI */
+    .foot-mini { background:var(--black); border-top:1px solid rgba(255,255,255,.05); padding:28px 0; }
+    .foot-mini .wrap { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--g200); flex-wrap:wrap; gap:10px; }
+    .foot-mini a { color:var(--g200); } .foot-mini a:hover { color:#fff; }
+
+    .rev-in { opacity:0; transform:translateY(18px); transition:opacity .5s, transform .5s; }
+    .rev-in.vis { opacity:1; transform:translateY(0); }
+
+    @media(max-width:900px) {
+      .wrap{padding:0 20px} nav{padding:0 20px}
+      .nav-links{display:none}
+      .les-row { grid-template-columns:60px 1fr auto; }
+      .les-zaal { display:none; }
+      .zalen-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:600px) {
+      .les-row { grid-template-columns:56px 1fr; }
+      .les-pill { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="https://static.wixstatic.com/media/4ea3c4_a9af118e2d174731b91fdeb6dca0a89b~mv2.png" alt="EasyActive Meppel" /></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#aanbod">Aanbod</a></li>
+    <li><a href="index.html#lessen">Lessen</a></li>
+    <li><a href="rooster.html" class="active">Rooster</a></li>
+    <li><a href="index.html#lidmaatschap">Lidmaatschap</a></li>
+    <li><a href="index.html#reviews">Reviews</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
+    <a href="index.html#book" class="btn btn-red">Gratis online gesprek →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="pg-hero">
+  <div class="wrap">
+    <h1 class="pg-title">Groepsles<br /><em>Rooster</em></h1>
+    <p class="pg-sub">20+ lessen per week — yoga, RPM, boksen, karate, streetdance en meer. Inbegrepen bij elk lidmaatschap.</p>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#4a9d8a"></div>Yoga & Balance</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#c8902a"></div>Spinning & RPM</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#6060c8"></div>Dans & Kids</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#D02828"></div>Boksen & Kickboksen</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#c87830"></div>Karate & Judo</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#3a9a5a"></div>30Active (small group)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOSTER -->
+<section class="rooster-section">
+  <div class="wrap">
+    <div class="day-tabs" id="dayTabs"></div>
+    <div id="scheduleContainer"></div>
+  </div>
+</section>
+
+<!-- ZALEN -->
+<section class="zalen-info">
+  <div class="wrap">
+    <div class="sec-tag">Faciliteiten</div>
+    <h2 style="font-size:clamp(28px,3.5vw,44px);font-weight:900;letter-spacing:-1.5px">Drie zalen, één club.</h2>
+    <div class="zalen-grid rev-in">
+      <div class="zaal-card">
+        <div class="zaal-num">1</div>
+        <h3>Grote groepszaal</h3>
+        <p>Yoga, Body Balance, Yin Yoga, Karate, Streetdance, Hip Hop en meer. Ruim opgezet, met goede vloer en spiegels.</p>
+      </div>
+      <div class="zaal-card">
+        <div class="zaal-num">2</div>
+        <h3>Spinning Studio</h3>
+        <p>RPM en Spinning lessen op professionele spinningfietsen. Ook ingericht voor 30Active small group sessions.</p>
+      </div>
+      <div class="zaal-card">
+        <div class="zaal-num">3</div>
+        <h3>Boksring & Bokshal</h3>
+        <p>Professionele boksring voor boksen, kickboksen, MMA, sparren en ladies-only lessen. Keurmerk Vechtsportautoriteit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="sub-cta">
+  <div class="wrap">
+    <h2 class="rev-in">Wil je een les proberen?</h2>
+    <p class="rev-in">Plan een gratis proefles of maak een online afspraak.</p>
+    <div class="ctas rev-in">
+      <a href="index.html#book" class="btn btn-red btn-lg">Gratis online gesprek →</a>
+      <a href="https://www.healthplanner.nl/reservation/13/ojEzo5==" target="_blank" class="btn btn-ghost btn-lg">Gratis proefles inplannen</a>
+      <a href="index.html#lidmaatschap" class="btn btn-ghost btn-lg">Bekijk lidmaatschappen</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="foot-mini">
+  <div class="wrap">
+    <span>© 2024 EasyActive Meppel · Paradijsweg 8, Meppel</span>
+    <div style="display:flex;gap:18px">
+      <a href="index.html">Home</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://www.facebook.com/easyActiveMeppel/" target="_blank">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const schedule = {
+  ma: {
+    label: 'Maandag',
+    short: 'Ma',
+    lessen: [
+      { time: '09:00', name: 'Yoga', zaal: 1, cat: 'yoga', pill: 'Yoga' },
+      { time: '10:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '10:30', name: 'Senioren Fit', zaal: 2, cat: 'sport', pill: 'Fitness' },
+      { time: '18:30', name: 'Karate Isshin Dojo', zaal: 1, cat: 'karate', pill: 'Karate' },
+      { time: '19:00', name: 'Kickboksen', zaal: 3, cat: 'boks', pill: 'Kickboksen' },
+      { time: '19:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '19:30', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '20:00', name: 'Boks je Fit', zaal: 3, cat: 'boks', pill: 'Boksen', note: "Ladies Only" },
+      { time: '20:00', name: 'RPM', zaal: 2, cat: 'spinning', pill: 'RPM' },
+      { time: '20:10', name: 'Body Balance', zaal: 1, cat: 'yoga', pill: 'Yoga' },
+    ]
+  },
+  di: {
+    label: 'Dinsdag',
+    short: 'Di',
+    lessen: [
+      { time: '16:00', name: 'Streetdance', zaal: 2, cat: 'dans', pill: 'Dans', note: '6–8 jaar' },
+      { time: '17:00', name: 'Streetdance', zaal: 2, cat: 'dans', pill: 'Dans', note: '9–12 jaar' },
+      { time: '17:15', name: 'Kickboksen Jeugd', zaal: 3, cat: 'boks', pill: 'Kickboksen', note: 't/m 8 jaar' },
+      { time: '18:00', name: 'Hip Hop', zaal: 2, cat: 'dans', pill: 'Dans', note: '13+' },
+      { time: '18:00', name: 'Kickboksen Jeugd', zaal: 3, cat: 'boks', pill: 'Kickboksen', note: 'Gevorderden 8–12 jaar' },
+      { time: '19:00', name: 'Kicks', zaal: 1, cat: 'karate', pill: 'Karate' },
+      { time: '19:00', name: 'Boksen', zaal: 3, cat: 'boks', pill: 'Boksen' },
+      { time: '19:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '19:30', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+    ]
+  },
+  wo: {
+    label: 'Woensdag',
+    short: 'Wo',
+    lessen: [
+      { time: '09:00', name: 'RPM / Spinning', zaal: 2, cat: 'spinning', pill: 'RPM' },
+      { time: '09:00', name: 'Body Balance', zaal: 1, cat: 'yoga', pill: 'Yoga' },
+      { time: '10:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '19:00', name: 'Karate met Peter', zaal: 1, cat: 'karate', pill: 'Karate' },
+      { time: '19:00', name: 'Kickboksen', zaal: 3, cat: 'boks', pill: 'Kickboksen' },
+      { time: '19:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '19:30', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '20:00', name: 'Boks je Fit', zaal: 3, cat: 'boks', pill: 'Boksen', note: "Ladies Only" },
+      { time: '20:00', name: 'Yin Yoga', zaal: 1, cat: 'yoga', pill: 'Yoga' },
+    ]
+  },
+  do: {
+    label: 'Donderdag',
+    short: 'Do',
+    lessen: [
+      { time: '18:00', name: 'Karate Jeugd', zaal: 1, cat: 'karate', pill: 'Karate', note: '7–12 jaar · Isshin Dojo' },
+      { time: '18:00', name: 'Kickboksen Jeugd', zaal: 3, cat: 'boks', pill: 'Kickboksen', note: 'Gevorderden 8–12 jaar' },
+      { time: '18:45', name: 'Karate Isshin Dojo', zaal: 1, cat: 'karate', pill: 'Karate' },
+      { time: '19:00', name: 'Bokszaktraining', zaal: 3, cat: 'boks', pill: 'Boksen' },
+      { time: '19:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '19:30', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '20:00', name: 'MMA', zaal: 3, cat: 'boks', pill: 'Vechtsport' },
+      { time: '20:00', name: 'RPM / Spinning', zaal: 2, cat: 'spinning', pill: 'RPM' },
+    ]
+  },
+  vr: {
+    label: 'Vrijdag',
+    short: 'Vr',
+    lessen: [
+      { time: '09:00', name: 'Yin Yoga', zaal: 1, cat: 'yoga', pill: 'Yoga' },
+      { time: '10:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '19:00', name: 'Kickboksen / Sparren', zaal: 3, cat: 'boks', pill: 'Kickboksen' },
+      { time: '19:00', name: 'Karate met Peter: Beginners', zaal: 1, cat: 'karate', pill: 'Karate' },
+      { time: '20:00', name: 'Karate met Peter: Gevorderden', zaal: 1, cat: 'karate', pill: 'Karate' },
+    ]
+  },
+  za: {
+    label: 'Zaterdag',
+    short: 'Za',
+    lessen: [
+      { time: '09:30', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '10:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '10:30', name: 'Karate Isshin Dojo', zaal: 1, cat: 'karate', pill: 'Karate' },
+      { time: '14:00', name: 'Wedstrijdtraining Boksen', zaal: 3, cat: 'boks', pill: 'Boksen', note: 'Interregionaal · wisselend Meppel/Leeuwarden' },
+    ]
+  },
+  zo: {
+    label: 'Zondag',
+    short: 'Zo',
+    lessen: [
+      { time: '09:30', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '10:00', name: '30Active', zaal: 2, cat: 'small', pill: '30Active', note: 'Small group training' },
+      { time: '11:00', name: 'Yin Yoga', zaal: 1, cat: 'yoga', pill: 'Yoga' },
+    ]
+  }
+};
+
+const dayOrder = ['ma','di','wo','do','vr','za','zo'];
+const today = ['zo','ma','di','wo','do','vr','za'][new Date().getDay()];
+let activeDay = today;
+
+function pillClass(cat) {
+  const map = { yoga:'pill-yoga', spinning:'pill-spinning', dans:'pill-dans', boks:'pill-boks', karate:'pill-karate', small:'pill-small', sport:'pill-sport' };
+  return map[cat] || 'pill-sport';
+}
+
+function renderSchedule() {
+  // Tabs
+  const tabs = document.getElementById('dayTabs');
+  tabs.innerHTML = dayOrder.map(d => {
+    const day = schedule[d];
+    const isToday = d === today;
+    const isActive = d === activeDay;
+    let cls = 'day-btn';
+    if (isActive) cls += ' active';
+    else if (isToday) cls += ' today';
+    return `<button class="${cls}" onclick="switchDay('${d}')">${day.label}</button>`;
+  }).join('');
+
+  // Panel
+  const container = document.getElementById('scheduleContainer');
+  container.innerHTML = dayOrder.map(d => {
+    const day = schedule[d];
+    const rows = day.lessen.map(l => `
+      <div class="les-row cat-${l.cat}">
+        <div class="les-time">${l.time}</div>
+        <div class="les-info">
+          <div class="les-name">${l.name}</div>
+          ${l.note ? `<div class="les-note">${l.note}</div>` : ''}
+        </div>
+        <span class="les-pill ${pillClass(l.cat)}">${l.pill}</span>
+        <div class="les-zaal"><span class="zaal-badge">Zaal ${l.zaal}</span></div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="les-panel ${d === activeDay ? 'visible' : ''}" id="panel-${d}">
+        <div class="les-count"><span>${day.lessen.length} lessen</span> op ${day.label.toLowerCase()}</div>
+        <div class="les-list">${rows}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function switchDay(d) {
+  activeDay = d;
+  renderSchedule();
+}
+
+renderSchedule();
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rev-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

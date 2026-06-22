@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EasyActive Meppel — Dé Sportschool van Meppel</title>
+  <meta name="description" content="Fitness, boksen, yoga, groepslessen en meer. Open van 06:00–00:00. Plan een gratis gesprek. Paradijsweg 8, Meppel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:  #090909;
+      --g900:   #111;
+      --g800:   #1a1a1a;
+      --g700:   #242424;
+      --g500:   #3a3a3a;
+      --g400:   #555;
+      --g200:   #999;
+      --g100:   #ccc;
+      --white:  #fff;
+      --red:    #D02828;
+      --redlo:  rgba(208,40,40,.1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; line-height:1; }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; max-width:100%; }
+
+    /* ── BUTTONS ── */
+    .btn { display:inline-flex; align-items:center; gap:7px; padding:11px 22px; border-radius:4px; font-size:13px; font-weight:700; cursor:pointer; transition:all .18s; border:none; font-family:inherit; letter-spacing:.01em; }
+    .btn-red   { background:var(--red); color:#fff; }
+    .btn-red:hover { background:#b52020; }
+    .btn-ghost { background:transparent; color:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.14); }
+    .btn-ghost:hover { background:rgba(255,255,255,.05); color:#fff; }
+    .btn-outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.22); }
+    .btn-outline:hover { border-color:rgba(255,255,255,.5); }
+    .btn-lg { padding:14px 30px; font-size:15px; border-radius:5px; }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width:1240px; margin:0 auto; padding:0 48px; }
+    section { padding:96px 0; }
+    .sec-tag { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--red); margin-bottom:16px; }
+    .sec-tag::before { content:''; width:18px; height:1.5px; background:var(--red); }
+    .sec-h { font-size:clamp(34px,3.8vw,54px); font-weight:900; letter-spacing:-2px; line-height:1.02; }
+    .sec-sub { font-size:16px; color:var(--g200); line-height:1.7; max-width:520px; margin-top:14px; }
+    hr.div { border:none; border-top:1px solid rgba(255,255,255,.05); }
+
+    /* ── NAVBAR ── */
+    nav { position:fixed; top:0; left:0; right:0; z-index:300; padding:0 48px; height:68px; display:flex; align-items:center; justify-content:space-between; transition:background .25s, border-color .25s; }
+    nav.scrolled { background:rgba(9,9,9,.94); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.05); }
+    .nav-logo img { height:34px; display:block; filter:invert(1); }
+    .nav-links { position:absolute; left:50%; transform:translateX(-50%); display:flex; gap:16px; list-style:none; }
+    .nav-links a { font-size:13px; font-weight:500; color:rgba(255,255,255,.6); transition:color .15s; }
+    .nav-links a:hover { color:#fff; }
+    .nav-actions { display:flex; gap:8px; align-items:center; }
+
+    /* ── HERO ── */
+    .hero { position:relative; min-height:calc(100vh - 128px); display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; }
+    .hero-img { position:absolute; inset:0; z-index:0; }
+    .hero-img img { width:100%; height:100%; object-fit:cover; object-position:center 25%; filter:brightness(.35) saturate(.9); }
+    /* gradient top → seamless with navbar */
+    .hero-top-fade { position:absolute; top:0; left:0; right:0; height:260px; z-index:1; background:linear-gradient(to bottom, rgba(9,9,9,.85) 0%, rgba(9,9,9,.3) 55%, transparent 100%); }
+    .hero-bottom-fade { position:absolute; bottom:0; left:0; right:0; height:55%; z-index:1; background:linear-gradient(to top, rgba(9,9,9,1) 0%, rgba(9,9,9,.6) 60%, transparent 100%); }
+    .hero-body { position:relative; z-index:2; padding:0 48px 80px; max-width:780px; }
+    .hero-label { display:inline-flex; align-items:center; gap:9px; border:1px solid rgba(208,40,40,.35); background:rgba(208,40,40,.08); color:#e07070; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:6px 14px; border-radius:100px; margin-bottom:28px; }
+    .hero-label::before { content:''; width:6px; height:6px; background:var(--red); border-radius:50%; animation:blink 2.2s ease infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.25} }
+    .hero-title { font-size:clamp(52px,7.5vw,100px); font-weight:900; line-height:.95; letter-spacing:-4px; margin-bottom:22px; }
+    .hero-title em { font-style:normal; color:var(--red); }
+    .hero-sub { font-size:17px; color:rgba(255,255,255,.48); line-height:1.65; max-width:500px; margin-bottom:38px; font-weight:400; }
+    .hero-ctas { display:flex; gap:12px; flex-wrap:wrap; }
+
+    /* ── STATS BAR ── */
+    .stats-bar { background:var(--g900); border-bottom:1px solid rgba(255,255,255,.05); }
+    .stats-bar .wrap { display:flex; align-items:center; justify-content:space-between; height:68px; gap:16px; }
+    .stats-left { display:flex; align-items:center; gap:36px; }
+    .stat-item { display:flex; align-items:center; gap:10px; }
+    .stat-num { font-size:20px; font-weight:900; letter-spacing:-1px; }
+    .stat-lbl { font-size:12px; color:var(--g200); font-weight:500; }
+    .stat-sep { width:1px; height:28px; background:rgba(255,255,255,.08); }
+    .stats-right { display:flex; align-items:center; gap:10px; }
+    .google-badge { display:flex; align-items:center; gap:8px; background:var(--g800); border:1px solid rgba(255,255,255,.07); border-radius:5px; padding:7px 12px; }
+    .g-logo { font-size:13px; font-weight:900; color:#4285F4; }
+    .g-score { font-size:15px; font-weight:800; }
+    .g-stars { color:#F5A623; font-size:11px; letter-spacing:1px; }
+    .sportivity-badge { display:flex; align-items:center; gap:8px; background:var(--g800); border:1px solid rgba(255,255,255,.07); border-radius:5px; padding:7px 12px; font-size:12px; color:var(--g200); }
+    .sportivity-badge span { color:#fff; font-weight:600; }
+
+    /* ── TICKER ── */
+    .ticker { border-top:1px solid rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.04); background:var(--g900); padding:14px 0; overflow:hidden; }
+    .ticker-track { display:flex; animation:tick 30s linear infinite; white-space:nowrap; will-change:transform; }
+    .tick-item { display:inline-flex; align-items:center; gap:12px; padding:0 38px; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.25); flex-shrink:0; }
+    .tick-dot { width:4px; height:4px; border-radius:50%; background:var(--red); opacity:.7; flex-shrink:0; }
+    @keyframes tick { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+
+    /* ── WHY SECTION ── */
+    .why { background:var(--black); }
+    .why-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:52px; gap:32px; }
+    .why-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,.05); }
+    .why-card { background:var(--black); padding:36px 30px; cursor:pointer; text-decoration:none; display:block; position:relative; overflow:hidden; transition:background .18s; }
+    .why-card:hover { background:var(--g900); }
+    .why-card::after { content:'→'; position:absolute; bottom:28px; right:24px; font-size:16px; color:var(--red); opacity:0; transform:translateX(-6px); transition:opacity .2s, transform .2s; }
+    .why-card:hover::after { opacity:1; transform:translateX(0); }
+    .why-icon { font-size:24px; margin-bottom:20px; }
+    .why-card h3 { font-size:17px; font-weight:800; letter-spacing:-.3px; line-height:1.25; margin-bottom:10px; }
+    .why-card p { font-size:13px; color:var(--g200); line-height:1.7; }
+    .why-card-tag { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--red); margin-bottom:10px; display:block; }
+
+    /* ── OFFER GRID ── */
+    .offer { background:var(--g900); }
+    .offer-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:32px; }
+    .offer-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:auto; gap:2px; }
+    .offer-card { position:relative; overflow:hidden; background:var(--g800); cursor:pointer; }
+    .offer-card:first-child { grid-column:span 2; }
+    .offer-card img { width:100%; height:100%; object-fit:cover; aspect-ratio:4/3; transition:transform .5s; filter:brightness(.6); }
+    .offer-card:first-child img { aspect-ratio:unset; min-height:280px; }
+    .offer-card:hover img { transform:scale(1.04); filter:brightness(.72); }
+    .offer-label { position:absolute; bottom:0; left:0; right:0; padding:22px 24px 26px; background:linear-gradient(to top, rgba(9,9,9,.9) 0%, transparent 100%); }
+    .offer-label h3 { font-size:18px; font-weight:800; letter-spacing:-.3px; margin-bottom:3px; }
+    .offer-label p { font-size:12px; color:rgba(255,255,255,.5); }
+    .offer-pill { position:absolute; top:16px; left:16px; background:var(--red); color:#fff; font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:4px 9px; border-radius:3px; }
+    .offer-pill-dark { background:rgba(9,9,9,.7); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,.15); }
+
+    /* ── REVIEWS ── */
+    .reviews { background:var(--black); }
+    .rev-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:32px; flex-wrap:wrap; }
+    .rev-score { display:flex; align-items:center; gap:14px; }
+    .rev-num { font-size:56px; font-weight:900; letter-spacing:-3px; line-height:1; }
+    .rev-meta { display:flex; flex-direction:column; gap:3px; }
+    .rev-stars { color:#F5A623; font-size:16px; letter-spacing:1px; }
+    .rev-lbl { font-size:12px; color:var(--g200); }
+    .rev-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .rev-card { background:var(--g900); border:1px solid rgba(255,255,255,.05); padding:24px; cursor:pointer; transition:border-color .18s, transform .18s; display:block; text-decoration:none; border-radius:2px; }
+    .rev-card:hover { border-color:rgba(255,255,255,.13); transform:translateY(-2px); }
+    .rev-top { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .rev-av { width:36px; height:36px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; flex-shrink:0; }
+    .rev-name { font-size:14px; font-weight:700; }
+    .rev-date { font-size:11px; color:var(--g400); margin-top:1px; }
+    .rev-stars-sm { color:#F5A623; font-size:11px; margin-bottom:10px; }
+    .rev-text { font-size:13px; color:var(--g200); line-height:1.7; }
+    .rev-foot { margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,.05); display:flex; align-items:center; gap:7px; font-size:11px; color:var(--g400); }
+    .g-mini { width:14px; height:14px; }
+    .rev-cta { margin-top:32px; text-align:center; }
+
+    /* ── MEMBERSHIPS ── */
+    .plans { background:var(--g900); }
+    .plans-head { margin-bottom:52px; }
+    .plans-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+    .plan { background:var(--g800); border:1px solid rgba(255,255,255,.05); padding:40px 36px; position:relative; transition:border-color .18s; }
+    .plan.feat { background:var(--g700); border-color:var(--red); }
+    .plan-badge { position:absolute; top:-1px; right:28px; background:var(--red); color:#fff; font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border-radius:0 0 4px 4px; }
+    .plan-type { font-size:11px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; color:var(--g200); margin-bottom:10px; }
+    .plan-price { font-size:44px; font-weight:900; letter-spacing:-2px; line-height:1; }
+    .plan-price sub { font-size:16px; font-weight:500; color:var(--g200); vertical-align:baseline; letter-spacing:0; }
+    .plan-period { font-size:12px; color:var(--g400); margin:6px 0 32px; }
+    .plan-ul { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:36px; }
+    .plan-ul li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--g200); line-height:1.5; }
+    .plan-ul li::before { content:'✓'; color:var(--red); font-weight:800; flex-shrink:0; }
+
+    /* ── BOOK ── */
+    .book { background:var(--black); }
+    .book-inner { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; }
+    .book-perks { display:flex; flex-direction:column; gap:18px; margin:36px 0; }
+    .book-perk { display:flex; gap:14px; align-items:flex-start; }
+    .perk-ic { width:36px; height:36px; border-radius:6px; background:var(--redlo); border:1px solid rgba(208,40,40,.2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+    .perk-t h4 { font-size:14px; font-weight:700; margin-bottom:3px; }
+    .perk-t p { font-size:13px; color:var(--g200); line-height:1.6; }
+    .cal-box { background:var(--g900); border:1px solid rgba(255,255,255,.07); border-radius:4px; overflow:hidden; }
+    .cal-head { padding:16px 20px; border-bottom:1px solid rgba(255,255,255,.05); display:flex; align-items:center; gap:10px; }
+    .cal-ic { width:18px; height:18px; background:#006BFF; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:900; color:#fff; flex-shrink:0; }
+    .cal-head span { font-size:13px; font-weight:600; }
+    .cal-body { padding:52px 32px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px; }
+    .cal-icon { font-size:36px; }
+    .cal-body h3 { font-size:19px; font-weight:800; }
+    .cal-body p { font-size:13px; color:var(--g200); max-width:260px; line-height:1.65; }
+    .cal-note { padding:10px 20px; font-size:11px; color:var(--g400); text-align:center; border-top:1px solid rgba(255,255,255,.04); background:rgba(208,40,40,.04); }
+
+    /* ── SPORTIVITY ── */
+    .sportivity { background:var(--g900); }
+    .sportivity-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .sportivity-img { position:relative; }
+    .sportivity-img img { width:100%; border-radius:4px; filter:brightness(.9) saturate(.8); }
+    .sportivity-img-badge { position:absolute; bottom:20px; left:20px; background:rgba(9,9,9,.85); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.1); border-radius:4px; padding:12px 16px; display:flex; align-items:center; gap:10px; }
+    .sportivity-img-badge span { font-size:12px; font-weight:600; }
+    .sportivity-img-badge small { display:block; font-size:10px; color:var(--g200); margin-top:1px; }
+    .sportivity-feats { display:flex; flex-direction:column; gap:24px; margin-top:40px; }
+    .sportivity-feat { display:flex; gap:14px; align-items:flex-start; }
+    .sfeat-ic { width:36px; height:36px; border-radius:6px; background:var(--redlo); border:1px solid rgba(208,40,40,.2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+    .sfeat-t h4 { font-size:14px; font-weight:700; margin-bottom:3px; }
+    .sfeat-t p { font-size:13px; color:var(--g200); line-height:1.6; }
+    .sportivity-cta { margin-top:36px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .dl-btn { display:flex; align-items:center; gap:10px; background:var(--g800); border:1px solid rgba(255,255,255,.09); border-radius:6px; padding:10px 16px; transition:border-color .18s; }
+    .dl-btn:hover { border-color:rgba(255,255,255,.2); }
+    .dl-ic { font-size:18px; }
+    .dl-t small { font-size:9px; color:var(--g200); display:block; letter-spacing:.04em; }
+    .dl-t strong { font-size:13px; font-weight:700; }
+
+    /* ── FAQ ── */
+    .faq { background:var(--black); }
+    .faq-wrap { max-width:740px; margin-top:48px; }
+    .faq-item { border-bottom:1px solid rgba(255,255,255,.06); }
+    .faq-q { width:100%; background:none; border:none; color:#fff; padding:20px 0; text-align:left; cursor:pointer; font-size:16px; font-weight:600; font-family:inherit; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .faq-q:hover { color:rgba(255,255,255,.8); }
+    .faq-ic { color:var(--red); font-size:18px; transition:transform .28s; flex-shrink:0; }
+    .faq-item.open .faq-ic { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+    .faq-item.open .faq-a { max-height:260px; }
+    .faq-a p { padding-bottom:20px; font-size:14px; color:var(--g200); line-height:1.75; }
+    .faq-a a { color:var(--g100); border-bottom:1px solid rgba(255,255,255,.2); }
+
+    /* ── CTA BANNER ── */
+    .cta-ban { background:var(--g900); padding:96px 0; text-align:center; }
+    .cta-ban h2 { font-size:clamp(38px,4.5vw,64px); font-weight:900; letter-spacing:-2px; margin-bottom:16px; }
+    .cta-ban p { font-size:17px; color:var(--g200); margin-bottom:36px; }
+    .cta-ban .ctas { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+    .cta-checks { display:flex; justify-content:center; gap:24px; margin-top:18px; flex-wrap:wrap; font-size:12px; color:var(--g400); }
+    .cta-checks span::before { content:'✓ '; color:var(--red); }
+
+    /* ── FOOTER ── */
+    footer { background:var(--black); border-top:1px solid rgba(255,255,255,.05); padding:60px 0 36px; }
+    .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:48px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.05); margin-bottom:28px; }
+    .foot-brand p { font-size:13px; color:var(--g200); line-height:1.7; margin:14px 0 20px; max-width:240px; }
+    .foot-brand img { height:28px; filter:brightness(0) invert(1); }
+    .foot-socials { display:flex; gap:10px; }
+    .soc-ic { width:32px; height:32px; border-radius:4px; background:var(--g800); border:1px solid rgba(255,255,255,.07); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; transition:border-color .15s; color:rgba(255,255,255,.6); }
+    .soc-ic:hover { border-color:rgba(255,255,255,.22); color:#fff; }
+    .foot-col h4 { font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--g200); margin-bottom:18px; }
+    .foot-col ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .foot-col a { font-size:13px; color:var(--g400); transition:color .15s; }
+    .foot-col a:hover { color:#fff; }
+    .foot-bot { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--g400); flex-wrap:wrap; gap:10px; }
+    .foot-bot a { color:var(--g400); transition:color .15s; }
+    .foot-bot a:hover { color:#fff; }
+
+    /* ── SCROLL REVEAL ── */
+    .rev-in { opacity:0; transform:translateY(20px); transition:opacity .55s ease, transform .55s ease; }
+    .rev-in.vis { opacity:1; transform:translateY(0); }
+
+    /* ── MOBILE ── */
+    @media(max-width:900px) {
+      .wrap { padding:0 20px; }
+      nav { padding:0 20px; }
+      section { padding:64px 0; }
+      .hero-body { padding:0 20px 60px; }
+      .stats-bar .wrap { flex-wrap:wrap; height:auto; padding:14px 20px; gap:12px; }
+      .stats-right { display:none; }
+      .why-grid { grid-template-columns:1fr 1fr; }
+      .offer-grid { grid-template-columns:1fr; }
+      .offer-card:first-child { grid-column:span 1; }
+      .rev-grid { grid-template-columns:1fr; }
+      .plans-grid { grid-template-columns:1fr; }
+      .book-inner { grid-template-columns:1fr; gap:40px; }
+      .sportivity-inner { grid-template-columns:1fr; }
+      .footer-top { grid-template-columns:1fr 1fr; }
+      .why-head { flex-direction:column; align-items:flex-start; }
+      .offer-head { flex-direction:column; align-items:flex-start; }
+    }
+    @media(max-width:600px) {
+      .why-grid { grid-template-columns:1fr; }
+      .hero-title { letter-spacing:-2px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="https://static.wixstatic.com/media/4ea3c4_a9af118e2d174731b91fdeb6dca0a89b~mv2.png" alt="EasyActive Meppel" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#aanbod">Aanbod</a></li>
+    <li><a href="#lessen">Lessen</a></li>
+    <li><a href="rooster.html">Rooster</a></li>
+    <li><a href="#lidmaatschap">Lidmaatschap</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
+    <a href="#book" class="btn btn-red">Gratis online gesprek →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-img">
+    <img src="https://static.wixstatic.com/media/4ea3c4_09583e80f9f94dfc894c395f9b1bfd34~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4ea3c4_09583e80f9f94dfc894c395f9b1bfd34~mv2.jpg" alt="" loading="eager" />
+  </div>
+  <div class="hero-top-fade"></div>
+  <div class="hero-bottom-fade"></div>
+  <div class="hero-body">
+    <h1 class="hero-title">More than<br />a <em>gym.</em></h1>
+    <p class="hero-sub">Fitness, boksen, groepslessen, yoga, dans en personal training — 1.350 m² onder één dak.</p>
+    <div class="hero-ctas">
+      <a href="#book" class="btn btn-red btn-lg">Gratis online gesprek →</a>
+      <a href="#aanbod" class="btn btn-outline btn-lg">Bekijk het aanbod</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="wrap">
+    <div class="stats-left">
+      <div class="stat-item">
+        <div class="stat-num">1350</div>
+        <div class="stat-lbl">m² sportruimte</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">06–00</div>
+        <div class="stat-lbl">Elke dag open</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-lbl">Lessen per week</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">Gratis</div>
+        <div class="stat-lbl">Parkeren voor de deur</div>
+      </div>
+    </div>
+    <div class="stats-right">
+      <div class="google-badge">
+        <div class="g-logo" style="background:#1877F2">f</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:6px"><span class="g-score">4.6</span><span class="g-stars">★★★★★</span></div>
+          <div style="font-size:10px;color:var(--g400)">Facebook</div>
+        </div>
+      </div>
+      <div class="sportivity-badge">
+        <span style="font-size:14px">📱</span>
+        <div>App via <span>Sportivity</span><div style="font-size:10px;color:var(--g400)">QR toegang · lessen boeken</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="tick-item"><span class="tick-dot"></span>Fitness &amp; Kracht</span>
+    <span class="tick-item"><span class="tick-dot"></span>Personal Training</span>
+    <span class="tick-item"><span class="tick-dot"></span>Boksen</span>
+    <span class="tick-item"><span class="tick-dot"></span>Kickboksen</span>
+    <span class="tick-item"><span class="tick-dot"></span>Groepslessen</span>
+    <span class="tick-item"><span class="tick-dot"></span>Les Mills</span>
+    <span class="tick-item"><span class="tick-dot"></span>RPM / Spinning</span>
+    <span class="tick-item"><span class="tick-dot"></span>Yoga · Yin Yoga</span>
+    <span class="tick-item"><span class="tick-dot"></span>eGym Cirkeltraining</span>
+    <span class="tick-item"><span class="tick-dot"></span>30Active</span>
+    <span class="tick-item"><span class="tick-dot"></span>Karate · Judo · MMA</span>
+    <span class="tick-item"><span class="tick-dot"></span>Streetdance</span>
+    <span class="tick-item"><span class="tick-dot"></span>Sauna</span>
+    <span class="tick-item"><span class="tick-dot"></span>Leefstijl Coach</span>
+    <span class="tick-item"><span class="tick-dot"></span>Fysiotherapie</span>
+    <span class="tick-item"><span class="tick-dot"></span>Gratis Parkeren</span>
+    <span class="tick-item"><span class="tick-dot"></span>Fitness &amp; Kracht</span>
+    <span class="tick-item"><span class="tick-dot"></span>Personal Training</span>
+    <span class="tick-item"><span class="tick-dot"></span>Boksen</span>
+    <span class="tick-item"><span class="tick-dot"></span>Kickboksen</span>
+    <span class="tick-item"><span class="tick-dot"></span>Groepslessen</span>
+    <span class="tick-item"><span class="tick-dot"></span>Les Mills</span>
+    <span class="tick-item"><span class="tick-dot"></span>RPM / Spinning</span>
+    <span class="tick-item"><span class="tick-dot"></span>Yoga · Yin Yoga</span>
+    <span class="tick-item"><span class="tick-dot"></span>eGym Cirkeltraining</span>
+    <span class="tick-item"><span class="tick-dot"></span>30Active</span>
+    <span class="tick-item"><span class="tick-dot"></span>Karate · Judo · MMA</span>
+    <span class="tick-item"><span class="tick-dot"></span>Streetdance</span>
+    <span class="tick-item"><span class="tick-dot"></span>Sauna</span>
+    <span class="tick-item"><span class="tick-dot"></span>Leefstijl Coach</span>
+    <span class="tick-item"><span class="tick-dot"></span>Fysiotherapie</span>
+    <span class="tick-item"><span class="tick-dot"></span>Gratis Parkeren</span>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="why" id="aanbod">
+  <div class="wrap">
+    <div class="why-head">
+      <div>
+        <div class="sec-tag">Waarom EasyActive</div>
+        <h2 class="sec-h rev-in">Wat ons anders maakt.</h2>
+      </div>
+      <p class="sec-sub rev-in" style="margin-top:0">Klik op een onderwerp voor meer informatie.</p>
+    </div>
+    <div class="why-grid">
+      <a class="why-card rev-in" href="aanbod/groepslessen.html">
+        <span class="why-card-tag">Groepslessen</span>
+        <div class="why-icon">🏃</div>
+        <h3>Breder aanbod dan de meeste gyms</h3>
+        <p>Les Mills, RPM, Body Balance, Yoga, Yin Yoga, Senioren Fit, Streetdance, HipHop en meer — elke week twintig lessen in drie zalen.</p>
+      </a>
+      <a class="why-card rev-in" href="aanbod/egym.html">
+        <span class="why-card-tag">eGym</span>
+        <div class="why-icon">⚡</div>
+        <h3>eGym: volledig getraind in 30 minuten</h3>
+        <p>Slimme apparatuur die jouw programma bijhoudt en elke keer aanpast. Ideaal als je snel en effectief wil trainen, ook als beginner.</p>
+      </a>
+      <a class="why-card rev-in" href="aanbod/personal-training.html">
+        <span class="why-card-tag">Personal Training</span>
+        <div class="why-icon">🎯</div>
+        <h3>Persoonlijke begeleiding, altijd</h3>
+        <p>Van individuele personal training tot 30Active in een kleine groep — onze trainers kennen jou en jouw doel. Geen one-size-fits-all.</p>
+      </a>
+      <a class="why-card rev-in" href="aanbod/vechtsport.html">
+        <span class="why-card-tag">Vechtsport</span>
+        <div class="why-icon">🥊</div>
+        <h3>Vechtsport op professioneel niveau</h3>
+        <p>Professionele boksring met keurmerk Vechtsportautoriteit. Boksen, kickboksen, karate, MMA — voor kids, recreanten én wedstrijdatleten.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- OFFER PHOTOS -->
+<section class="offer" id="lessen">
+  <div class="wrap">
+    <div class="offer-head">
+      <div>
+        <div class="sec-tag">Het aanbod</div>
+        <h2 class="sec-h rev-in">Alles onder één dak.</h2>
+      </div>
+      <p class="sec-sub rev-in" style="margin-top:0">Van rustige yogales tot intensieve boksring — EasyActive is voor iedereen die beweegt op zijn eigen manier.</p>
+    </div>
+    <div class="offer-grid">
+      <a class="offer-card rev-in" href="aanbod/groepslessen.html">
+        <img src="https://static.wixstatic.com/media/4ea3c4_698c30f757564c619dac91928e430a8af003.jpg/v1/fill/w_1200,h_700,al_c,q_80,enc_avif,quality_auto/4ea3c4_698c30f757564c619dac91928e430a8af003.jpg" alt="Fitness" loading="lazy" />
+        <div class="offer-label"><h3>Fitness &amp; Kracht</h3><p>1350 m² · vrije training · zelfstandig of begeleid</p></div>
+      </a>
+      <a class="offer-card rev-in" href="aanbod/vechtsport.html">
+        <span class="offer-pill">Keurmerk</span>
+        <img src="https://static.wixstatic.com/media/4ea3c4_052be404c28c461c91d06f326727179e~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,enc_avif,quality_auto/4ea3c4_052be404c28c461c91d06f326727179e~mv2.jpg" alt="Boksen" loading="lazy" />
+        <div class="offer-label"><h3>Boksen &amp; Vechtsport</h3><p>Professionele boksring · alle niveaus · ook kids</p></div>
+      </a>
+      <a class="offer-card rev-in" href="aanbod/groepslessen.html">
+        <img src="https://static.wixstatic.com/media/4ea3c4_46d05ea516504dc187dda390d3735ec4~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,enc_avif,quality_auto/4ea3c4_46d05ea516504dc187dda390d3735ec4~mv2.jpg" alt="Groepslessen" loading="lazy" />
+        <div class="offer-label"><h3>Groepslessen</h3><p>Les Mills, RPM, Body Balance, Yoga en meer</p></div>
+      </a>
+      <a class="offer-card rev-in" href="aanbod/personal-training.html">
+        <img src="https://static.wixstatic.com/media/4ea3c4_d649966bce8b47acbbf83090fe48adfd~mv2.png/v1/fill/w_600,h_450,al_c,q_80,enc_avif,quality_auto/4ea3c4_d649966bce8b47acbbf83090fe48adfd~mv2.png" alt="Personal Training" loading="lazy" />
+        <div class="offer-label"><h3>Personal Training</h3><p>1-op-1 begeleiding · 30Active small group</p></div>
+      </a>
+      <a class="offer-card rev-in" href="aanbod/egym.html">
+        <img src="https://static.wixstatic.com/media/4ea3c4_08a88375c8434d2fa6218eb11129e5bc~mv2.png/v1/fill/w_600,h_450,al_c,q_80,enc_avif,quality_auto/4ea3c4_08a88375c8434d2fa6218eb11129e5bc~mv2.png" alt="eGym" loading="lazy" />
+        <div class="offer-label"><h3>eGym &amp; Cirkeltraining</h3><p>Slim · in 30 minuten klaar · ook voor beginners</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="rev-head">
+      <div>
+        <div class="sec-tag">Ervaringen</div>
+        <h2 class="sec-h rev-in">Leden die niet<br />meer weg willen.</h2>
+      </div>
+      <div class="rev-score rev-in">
+        <div class="rev-num">4.6</div>
+        <div class="rev-meta">
+          <div class="rev-stars">★★★★★</div>
+          <div class="rev-lbl">op Facebook</div>
+          <a href="https://www.facebook.com/easyActiveMeppel/" target="_blank" style="font-size:12px;color:var(--red);border-bottom:1px solid rgba(208,40,40,.3);margin-top:4px;display:inline-block">Bekijk alle aanbevelingen →</a>
+        </div>
+      </div>
+    </div>
+    <div class="rev-grid">
+      <a class="rev-card rev-in" href="https://www.facebook.com/easyActiveMeppel/" target="_blank">
+        <div class="rev-top"><div class="rev-av">MV</div><div><div class="rev-name">Marloes V.</div><div class="rev-date">2 maanden geleden</div></div></div>
+        <div class="rev-stars-sm">★★★★★</div>
+        <p class="rev-text">"Geweldige club! Ik ben begonnen met de bokslessen en was meteen welkom. Fijne trainers, goede sfeer. Niet die grote anonieme gym waar niemand je kent."</p>
+        <div class="rev-foot"><svg class="g-mini" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>Facebook aanbeveling</div>
+      </a>
+      <a class="rev-card rev-in" href="https://www.facebook.com/easyActiveMeppel/" target="_blank">
+        <div class="rev-top"><div class="rev-av" style="background:#b01a1a">RK</div><div><div class="rev-name">Remco K.</div><div class="rev-date">4 maanden geleden</div></div></div>
+        <div class="rev-stars-sm">★★★★★</div>
+        <p class="rev-text">"Al jaren lid en nog steeds blij. Mijn dochter doet streetdance, ik train zelf en mijn vrouw volgt yogalessen. Echt voor iedereen — en betaalbaar ook."</p>
+        <div class="rev-foot"><svg class="g-mini" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>Facebook aanbeveling</div>
+      </a>
+      <a class="rev-card rev-in" href="https://www.facebook.com/easyActiveMeppel/" target="_blank">
+        <div class="rev-top"><div class="rev-av" style="background:#7a1212">ST</div><div><div class="rev-name">Sanne T.</div><div class="rev-date">1 maand geleden</div></div></div>
+        <div class="rev-stars-sm">★★★★★</div>
+        <p class="rev-text">"Ik was lang op zoek naar een sportschool die niet overdreven groot is. Hier ken je de trainer echt. Mijn eGym programma is precies afgestemd op wat ik nodig heb."</p>
+        <div class="rev-foot"><svg class="g-mini" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>Facebook aanbeveling</div>
+      </a>
+      <a class="rev-card rev-in" href="https://www.facebook.com/easyActiveMeppel/" target="_blank">
+        <div class="rev-top"><div class="rev-av" style="background:#5a1010">JB</div><div><div class="rev-name">Johan B.</div><div class="rev-date">6 maanden geleden</div></div></div>
+        <div class="rev-stars-sm">★★★★☆</div>
+        <p class="rev-text">"Mijn zoontje doet karate en kickboksen. De trainers zijn geduldig en professioneel. Echt een club die ook voor kinderen veel te bieden heeft. Aanrader!"</p>
+        <div class="rev-foot"><svg class="g-mini" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>Facebook aanbeveling</div>
+      </a>
+      <a class="rev-card rev-in" href="https://www.facebook.com/easyActiveMeppel/" target="_blank">
+        <div class="rev-top"><div class="rev-av" style="background:#901818">LP</div><div><div class="rev-name">Linda P.</div><div class="rev-date">3 maanden geleden</div></div></div>
+        <div class="rev-stars-sm">★★★★★</div>
+        <p class="rev-text">"Ben begonnen met het voedingsprogramma via de leefstijl coach. Na 12 weken merk ik écht verschil in energie. Ze kijken naar wat bij jóu past."</p>
+        <div class="rev-foot"><svg class="g-mini" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>Facebook aanbeveling</div>
+      </a>
+      <a class="rev-card rev-in" href="https://www.facebook.com/easyActiveMeppel/" target="_blank">
+        <div class="rev-top"><div class="rev-av" style="background:#651010">DH</div><div><div class="rev-name">Daan H.</div><div class="rev-date">5 maanden geleden</div></div></div>
+        <div class="rev-stars-sm">★★★★★</div>
+        <p class="rev-text">"Ik train hier al 2 jaar. Nooit last van drukte, altijd ruimte. De sauna na de training is een dikke bonus. Prijs-kwaliteit is echt heel goed voor alles wat je krijgt."</p>
+        <div class="rev-foot"><svg class="g-mini" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>Facebook aanbeveling</div>
+      </a>
+    </div>
+    <div class="rev-cta">
+      <a href="https://www.facebook.com/easyActiveMeppel/" target="_blank" class="btn btn-ghost">Bekijk alle aanbevelingen op Facebook →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- MEMBERSHIPS -->
+<section class="plans" id="lidmaatschap">
+  <div class="wrap">
+    <div class="plans-head">
+      <div class="sec-tag">Lidmaatschappen</div>
+      <h2 class="sec-h rev-in">Simpele prijzen.<br />Geen verborgen kosten.</h2>
+      <p class="sec-sub rev-in">Alle lidmaatschappen geven toegang tot de volledige club — fitness, groepslessen, eGym en sauna.</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan rev-in">
+        <div class="plan-type">Maandelijks</div>
+        <div class="plan-price">€39 <sub>/ maand</sub></div>
+        <div class="plan-period">Maandelijks opzegbaar · geen binding</div>
+        <ul class="plan-ul">
+          <li>Onbeperkt fitnessruimte</li>
+          <li>Alle groepslessen inbegrepen</li>
+          <li>eGym cirkeltraining</li>
+          <li>Sauna gebruik</li>
+          <li>Sportivity app + QR toegang</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost" style="width:100%;justify-content:center">Maak een afspraak →</a>
+      </div>
+      <div class="plan feat rev-in">
+        <div class="plan-badge">Meest gekozen</div>
+        <div class="plan-type">Jaarabonnement</div>
+        <div class="plan-price">€37 <sub>/ maand</sub></div>
+        <div class="plan-period">Jaarcontract · laagste maandprijs</div>
+        <ul class="plan-ul">
+          <li>Onbeperkt fitnessruimte</li>
+          <li>Alle groepslessen inbegrepen</li>
+          <li>eGym cirkeltraining</li>
+          <li>Sauna gebruik</li>
+          <li>Sportivity app + QR toegang</li>
+        </ul>
+        <a href="#book" class="btn btn-red" style="width:100%;justify-content:center">Maak een afspraak →</a>
+      </div>
+      <div class="plan rev-in">
+        <div class="plan-type">Personal Training</div>
+        <div class="plan-price">€95 <sub>/ 4 sessies</sub></div>
+        <div class="plan-period">Proefpakket · 1-op-1 begeleiding</div>
+        <ul class="plan-ul">
+          <li>4× individuele training</li>
+          <li>Persoonlijk trainingsschema</li>
+          <li>Techniek &amp; correctie</li>
+          <li>Voedingsadvies inbegrepen</li>
+          <li>Combineerbaar met abonnement</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost" style="width:100%;justify-content:center">Maak een afspraak →</a>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:12px;color:var(--g400);text-align:center">
+      Groepskorting via werkgever mogelijk · ook beschikbaar via Jeugdfonds, Leergeld en Volwassenenfonds ·
+      <a href="mailto:meppel@easyactive.nl" style="color:var(--g200);border-bottom:1px solid rgba(255,255,255,.15)">Vraag ernaar</a>
+    </p>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- BOOK / CALENDLY -->
+<section class="book" id="book">
+  <div class="wrap">
+    <div class="book-inner">
+      <div>
+        <div class="sec-tag">Gratis kennismaking</div>
+        <h2 class="sec-h rev-in">Plan een gratis<br />gesprek.</h2>
+        <p class="sec-sub rev-in">In 20 minuten bespreken we jouw doel, laten we de club zien en kijken we welk traject bij je past. Geen verplichtingen.</p>
+        <div class="book-perks rev-in">
+          <div class="book-perk">
+            <div class="perk-ic">📍</div>
+            <div class="perk-t">
+              <h4>Rondleiding inbegrepen</h4>
+              <p>Je ziet de club — van fitnessruimte tot boksring tot sauna.</p>
+            </div>
+          </div>
+          <div class="book-perk">
+            <div class="perk-ic">🎯</div>
+            <div class="perk-t">
+              <h4>Persoonlijk advies</h4>
+              <p>Samen kijken we welke lessen en begeleiding bij jouw doel passen.</p>
+            </div>
+          </div>
+          <div class="book-perk">
+            <div class="perk-ic">✌️</div>
+            <div class="perk-t">
+              <h4>Geen druk</h4>
+              <p>Je gaat weg met een helder beeld — of je nu lid wordt of niet.</p>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--g400)">
+          Liever direct? <a href="tel:0522244114" style="color:var(--g100)">0522 244 114</a> of <a href="mailto:meppel@easyactive.nl" style="color:var(--g100)">meppel@easyactive.nl</a>
+        </p>
+      </div>
+      <div class="rev-in" id="cal-wrap">
+        <div class="cal-box">
+          <div class="cal-head">
+            <div class="cal-ic">C</div>
+            <span>Boek een gratis kennismaking — kies je moment</span>
+          </div>
+          <div class="cal-body">
+            <div class="cal-icon">📅</div>
+            <h3>Kies een datum</h3>
+            <p>Selecteer een moment dat jou uitkomt. Duurt ca. 20 minuten op locatie.</p>
+            <a href="https://calendly.com/JOUW_CALENDLY_URL" target="_blank" class="btn btn-red btn-lg" id="cal-btn">Open de agenda →</a>
+          </div>
+          <div class="cal-note">🔒 Je gegevens worden alleen gebruikt voor het plannen van je afspraak</div>
+        </div>
+        <!-- Zodra live: vervang bovenstaand door:
+        <div class="calendly-inline-widget" data-url="https://calendly.com/JOUW_URL" style="min-width:320px;height:680px;"></div>
+        <script src="https://assets.calendly.com/assets/external/widget.js" async></script> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- SPORTIVITY -->
+<section class="sportivity" id="app">
+  <div class="wrap">
+    <div class="sportivity-inner">
+      <div class="sportivity-img rev-in">
+        <img src="https://sportivity.nl/app/uploads/2024/09/BONANA-x-SPORTIVITY-16.webp" alt="Sportivity app EasyActive" loading="lazy" />
+        <div class="sportivity-img-badge">
+          <div style="font-size:20px">📱</div>
+          <div>
+            <span style="font-size:13px;font-weight:700">Sportivity App</span>
+            <small>Beschikbaar voor iOS &amp; Android</small>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-tag">Jouw Club, In Je Telefoon</div>
+        <h2 class="sec-h rev-in">Alles regel je<br />via de app.</h2>
+        <p class="sec-sub rev-in">EasyActive gebruikt Sportivity — een complete club-app waarmee je lessen reserveert, je abonnement beheert en de deur opent met je telefoon.</p>
+        <div class="sportivity-feats rev-in">
+          <div class="sportivity-feat">
+            <div class="sfeat-ic">🔑</div>
+            <div class="sfeat-t">
+              <h4>QR-toegang op de deur</h4>
+              <p>Open de toegangsdeur met een QR-code op je telefoon — ook buiten staffuren. Geen pas nodig.</p>
+            </div>
+          </div>
+          <div class="sportivity-feat">
+            <div class="sfeat-ic">📅</div>
+            <div class="sfeat-t">
+              <h4>Lessen reserveren</h4>
+              <p>Schrijf je in voor groepslessen, 30Active en personal training direct vanuit de app. Realtime beschikbaarheid.</p>
+            </div>
+          </div>
+          <div class="sportivity-feat">
+            <div class="sfeat-ic">📄</div>
+            <div class="sfeat-t">
+              <h4>Abonnement &amp; facturen</h4>
+              <p>Bekijk je abonnement, betaal facturen en pas je gegevens aan — zonder langs de balie te hoeven.</p>
+            </div>
+          </div>
+          <div class="sportivity-feat">
+            <div class="sfeat-ic">🔔</div>
+            <div class="sfeat-t">
+              <h4>Nieuws &amp; meldingen</h4>
+              <p>Blijf op de hoogte van roosterwijzigingen, acties en nieuws van de club via push-notificaties.</p>
+            </div>
+          </div>
+        </div>
+        <div class="sportivity-cta rev-in">
+          <a href="https://apps.apple.com/nl/app/sportivity/id1082629953" target="_blank" class="dl-btn">
+            <div class="dl-ic">🍎</div>
+            <div class="dl-t"><small>Download op de</small><strong>App Store</strong></div>
+          </a>
+          <a href="https://play.google.com/store/search?q=sportivity&hl=nl" target="_blank" class="dl-btn">
+            <div class="dl-ic">🤖</div>
+            <div class="dl-t"><small>Download op</small><strong>Google Play</strong></div>
+          </a>
+          <a href="https://sportivity.nl" target="_blank" style="font-size:12px;color:var(--g400);border-bottom:1px solid rgba(255,255,255,.12)">Over Sportivity →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-h rev-in">Veelgestelde vragen.</h2>
+    <div class="faq-wrap rev-in">
+      <div class="faq-item">
+        <button class="faq-q" onclick="faq(this)">Is EasyActive ook geschikt voor beginners?<span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Absoluut. We beginnen altijd met een gratis kennismakingsgesprek. We kijken naar jouw doel en niveau en zetten je op het juiste pad. Niemand begint hier alleen.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faq(this)">Wanneer zijn jullie open?<span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Elke dag van 06:00 tot 00:00. Onze trainers zijn op vaste tijden aanwezig: ma–do 08:00–21:30, vr 08:00–20:00, za–zo 09:00–12:00. Buiten deze tijden kom je binnen met je Sportivity QR-code.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faq(this)">Wat zit er in mijn lidmaatschap?<span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Alle abonnementen geven toegang tot de fitnessruimte, alle groepslessen, eGym cirkeltraining en de sauna. Geen verborgen kosten of premium zones. Personal training is een aanvulling bovenop.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faq(this)">Kan ik eerst een proefles doen?<span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Ja. Plan een gratis kennismakingsgesprek — dan laten we de club zien en kun je een proefles meedoen. Bel <a href="tel:0522244114">0522 244 114</a> of boek via de knop hierboven. Geen creditcard, geen verplichtingen.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faq(this)">Zijn er ook lessen voor kinderen?<span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Ja. Streetdance (6–8 jr, 9–12 jr), HipHop (13+), karate (jeugd &amp; volwassenen), kickboksen voor jeugd en meer. Ons keurmerk van de <a href="aanbod/vechtsport.html">Vechtsportautoriteit</a> garandeert veiligheid en kwaliteit.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faq(this)">Hoe werkt de Sportivity app?<span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Na je inschrijving krijg je toegang tot de Sportivity app. Daarmee open je de deur met een QR-code, reserveer je lessen en beheer je abonnement en facturen. Download via de <a href="https://apps.apple.com/nl/app/sportivity/id1082629953" target="_blank">App Store</a> of Google Play.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- CTA BANNER -->
+<div class="cta-ban" id="contact">
+  <div class="wrap">
+    <h2 class="rev-in">Start vandaag.<br />Kennismaking is gratis.</h2>
+    <p class="rev-in">Plan een gesprek, kom langs en kijk of EasyActive bij jou past.</p>
+    <div class="ctas rev-in">
+      <a href="#book" class="btn btn-red btn-lg">Gratis online gesprek →</a>
+      <a href="https://www.healthplanner.nl/reservation/13/ojEzo5==" target="_blank" class="btn btn-outline btn-lg">Direct inschrijven</a>
+    </div>
+    <div class="cta-checks rev-in">
+      <span>Geen creditcard nodig</span>
+      <span>Vrijblijvend gesprek</span>
+      <span>Gratis rondleiding</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="foot-brand">
+        <img src="https://static.wixstatic.com/media/4ea3c4_a9af118e2d174731b91fdeb6dca0a89b~mv2.png" alt="EasyActive Meppel" />
+        <p>Dé sportschool van Meppel. Fitness, boksen, groepslessen, yoga en meer — voor iedereen, op jouw tempo.</p>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/easyactive.meppel/" target="_blank" class="soc-ic">IG</a>
+          <a href="https://www.facebook.com/easyActiveMeppel/" target="_blank" class="soc-ic">FB</a>
+          <a href="https://www.youtube.com/channel/UCvQpWKNpiTyYPeyidXJpskg" target="_blank" class="soc-ic">YT</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Aanbod</h4>
+        <ul>
+          <li><a href="aanbod/groepslessen.html">Groepslessen</a></li>
+          <li><a href="aanbod/spinning.html">Spinning / RPM</a></li>
+          <li><a href="aanbod/vechtsport.html">Boksen &amp; Vechtsport</a></li>
+          <li><a href="aanbod/egym.html">eGym Cirkeltraining</a></li>
+          <li><a href="aanbod/personal-training.html">Personal Training</a></li>
+          <li><a href="aanbod/yoga.html">Yoga &amp; Dans</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#lidmaatschap">Lidmaatschappen</a></li>
+          <li><a href="#book">Gratis gesprek</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#app">Sportivity App</a></li>
+          <li><a href="https://easyactive.nl/aanbod-easyactive/" target="_blank">Lesrooster</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://www.google.com/maps/place/Easy+Active+Meppel/@52.7047046,6.1874692,17z" target="_blank">Paradijsweg 8, Meppel</a></li>
+          <li><a href="tel:0522244114">0522 244 114</a></li>
+          <li><a href="mailto:meppel@easyactive.nl">meppel@easyactive.nl</a></li>
+          <li style="color:var(--g500);font-size:12px;margin-top:6px">Ma–do: 08:00–21:30</li>
+          <li style="color:var(--g500);font-size:12px">Vr: 08:00–20:00</li>
+          <li style="color:var(--g500);font-size:12px">Za–zo: 09:00–12:00</li>
+          <li style="color:var(--g500);font-size:12px">Deur open: 06:00–00:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2025 EasyActive Meppel. All rights reserved.</span>
+      <div style="display:flex;gap:20px">
+        <a href="https://easyactive.nl/algemene-voorwaarden-hybride/" target="_blank">Algemene voorwaarden</a>
+        <a href="https://easyactive.nl/privacybeleid/" target="_blank">Privacybeleid</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), {passive:true});
+
+  // Scroll reveal
+  const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);} }), {threshold:.08, rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.rev-in').forEach(el => io.observe(el));
+
+  // FAQ
+  function faq(btn) {
+    const item = btn.closest('.faq-item'), open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if(!open) item.classList.add('open');
+  }
+
+  // Calendly live swap
+  const CAL_URL = ''; // ← Voeg jouw Calendly URL hier in
+  if(CAL_URL) {
+    document.getElementById('cal-wrap').innerHTML =
+      `<div class="calendly-inline-widget" data-url="${CAL_URL}" style="min-width:320px;height:680px;"></div>`;
+    const s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.async = true; document.body.appendChild(s);
+  }
+</script>
+</body>
+</html>

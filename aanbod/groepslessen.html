@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groepslessen — EasyActive Meppel</title>
+  <meta name="description" content="20+ groepslessen per week bij EasyActive Meppel. Les Mills, RPM, Body Balance, Yoga, Streetdance, HipHop, Senioren Fit en meer. Inbegrepen bij elk lidmaatschap." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black:#090909; --g900:#111; --g800:#1a1a1a; --g700:#242424; --g200:#999; --white:#fff; --red:#D02828; --redlo:rgba(208,40,40,.1); }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; line-height:1; }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; max-width:100%; }
+    .btn { display:inline-flex; align-items:center; gap:7px; padding:11px 22px; border-radius:4px; font-size:13px; font-weight:700; cursor:pointer; transition:all .18s; border:none; font-family:inherit; }
+    .btn-red { background:var(--red); color:#fff; } .btn-red:hover { background:#b52020; }
+    .btn-ghost { background:transparent; color:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.14); } .btn-ghost:hover { background:rgba(255,255,255,.05); color:#fff; }
+    .btn-lg { padding:14px 30px; font-size:15px; border-radius:5px; }
+    .wrap { max-width:1240px; margin:0 auto; padding:0 48px; }
+    .sec-tag { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--red); margin-bottom:16px; }
+    .sec-tag::before { content:''; width:18px; height:1.5px; background:var(--red); }
+    .sec-h { font-size:clamp(34px,4vw,56px); font-weight:900; letter-spacing:-2px; line-height:1.02; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:300; padding:0 48px; height:68px; display:flex; align-items:center; justify-content:space-between; background:rgba(9,9,9,.94); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.05); }
+    .nav-logo img { height:34px; filter:invert(1); }
+    .nav-links { position:absolute; left:50%; transform:translateX(-50%); display:flex; gap:16px; list-style:none; }
+    .nav-links a { font-size:13px; font-weight:500; color:rgba(255,255,255,.6); transition:color .15s; } .nav-links a:hover { color:#fff; }
+    .nav-actions { display:flex; gap:8px; align-items:center; }
+    .pg-hero { padding:140px 0 80px; position:relative; overflow:hidden; }
+    .pg-hero-bg { position:absolute; inset:0; background:linear-gradient(135deg, rgba(208,40,40,.08) 0%, transparent 50%), linear-gradient(to bottom, var(--g900) 0%, var(--black) 100%); }
+    .pg-hero-content { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .pg-tag { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(208,40,40,.3); background:rgba(208,40,40,.08); color:#e07070; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:20px; }
+    .pg-title { font-size:clamp(44px,6vw,80px); font-weight:900; letter-spacing:-3px; line-height:.95; margin-bottom:18px; }
+    .pg-title em { font-style:normal; color:var(--red); }
+    .pg-sub { font-size:16px; color:var(--g200); line-height:1.7; max-width:460px; margin-bottom:30px; }
+    .pg-hero-img { border-radius:4px; overflow:hidden; }
+    .pg-hero-img img { width:100%; aspect-ratio:4/3; object-fit:cover; filter:brightness(.75) saturate(.85); }
+    /* CLASSES GRID */
+    .classes { padding:80px 0; background:var(--g900); }
+    .cls-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:44px; }
+    .cls-card { background:var(--g800); padding:28px 24px; border-top:2px solid transparent; transition:border-color .18s; }
+    .cls-card:hover { border-top-color:var(--red); }
+    .cls-icon { font-size:24px; margin-bottom:14px; }
+    .cls-name { font-size:16px; font-weight:800; letter-spacing:-.2px; margin-bottom:6px; }
+    .cls-provider { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
+    .cls-desc { font-size:13px; color:var(--g200); line-height:1.7; }
+    .cls-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:12px; }
+    .cls-tag { font-size:10px; font-weight:700; background:rgba(255,255,255,.06); color:rgba(255,255,255,.5); padding:3px 8px; border-radius:3px; }
+    /* INCLUDED */
+    .included { padding:80px 0; background:var(--black); }
+    .inc-inner { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; margin-top:44px; }
+    .inc-img img { width:100%; border-radius:4px; filter:brightness(.8) saturate(.85); }
+    .inc-text p { font-size:15px; color:var(--g200); line-height:1.75; margin-top:14px; max-width:460px; }
+    .inc-points { margin-top:28px; display:flex; flex-direction:column; gap:12px; }
+    .inc-pt { display:flex; align-items:flex-start; gap:12px; font-size:14px; color:rgba(255,255,255,.85); line-height:1.6; }
+    .inc-pt::before { content:'✓'; color:var(--red); font-weight:900; flex-shrink:0; }
+    /* CTA */
+    .sub-cta { padding:80px 0; background:var(--g900); text-align:center; }
+    .sub-cta h2 { font-size:clamp(34px,4vw,52px); font-weight:900; letter-spacing:-2px; margin-bottom:12px; }
+    .sub-cta p { font-size:16px; color:var(--g200); margin-bottom:32px; }
+    .sub-cta .ctas { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+    .foot-mini { background:var(--black); border-top:1px solid rgba(255,255,255,.05); padding:28px 0; }
+    .foot-mini .wrap { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--g200); flex-wrap:wrap; gap:10px; }
+    .foot-mini a { color:var(--g200); } .foot-mini a:hover { color:#fff; }
+    .rev-in { opacity:0; transform:translateY(18px); transition:opacity .5s, transform .5s; }
+    .rev-in.vis { opacity:1; transform:translateY(0); }
+    @media(max-width:900px) { .wrap{padding:0 20px} nav{padding:0 20px} .pg-hero-content{grid-template-columns:1fr} .cls-grid{grid-template-columns:1fr 1fr} .inc-inner{grid-template-columns:1fr} }
+    @media(max-width:600px) { .cls-grid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo"><img src="https://static.wixstatic.com/media/4ea3c4_a9af118e2d174731b91fdeb6dca0a89b~mv2.png" alt="EasyActive Meppel" /></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#aanbod">Aanbod</a></li>
+    <li><a href="../index.html#lessen">Lessen</a></li>
+    <li><a href="../rooster.html">Rooster</a></li>
+    <li><a href="../index.html#lidmaatschap">Lidmaatschap</a></li>
+    <li><a href="../index.html#reviews">Reviews</a></li>
+    <li><a href="../index.html#faq">FAQ</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
+    <a href="../index.html#book" class="btn btn-red">Gratis online gesprek →</a>
+  </div>
+</nav>
+
+<section class="pg-hero">
+  <div class="pg-hero-bg"></div>
+  <div class="wrap">
+    <div class="pg-hero-content">
+      <div>
+        <h1 class="pg-title">Groeps<br /><em>lessen</em></h1>
+        <p class="pg-sub">Van rustige Body Balance tot intensieve RPM — bij EasyActive Meppel zijn meer dan twintig lessen per week inbegrepen in je lidmaatschap. Voor alle niveaus en leeftijden.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="../index.html#book" class="btn btn-red btn-lg">Gratis online gesprek →</a>
+          <a href="https://www.healthplanner.nl/reservation/13/ojEzo5==" target="_blank" class="btn btn-ghost btn-lg">Gratis proefles inplannen</a>
+          <a href="https://easyactive.nl/aanbod-easyactive/" target="_blank" class="btn btn-ghost btn-lg">Bekijk rooster</a>
+        </div>
+      </div>
+      <div class="pg-hero-img rev-in">
+        <img src="https://static.wixstatic.com/media/4ea3c4_46d05ea516504dc187dda390d3735ec4~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80,enc_avif,quality_auto/4ea3c4_46d05ea516504dc187dda390d3735ec4~mv2.jpg" alt="Groepslessen EasyActive Meppel" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="classes">
+  <div class="wrap">
+    <div class="sec-tag">Lessen</div>
+    <h2 class="sec-h rev-in">Alles in het rooster.</h2>
+    <div class="cls-grid">
+      <div class="cls-card rev-in">
+        <div class="cls-icon">🚴</div>
+        <div class="cls-provider">Les Mills</div>
+        <div class="cls-name">RPM / Spinning</div>
+        <p class="cls-desc">Intervaltraining op de fiets. Hoge intensiteit, snelle resultaten, laag blessurerisico. Ma 20:00 · Wo 09:00 · Do 20:00</p>
+        <div class="cls-tags"><span class="cls-tag">Conditie</span><span class="cls-tag">Intensief</span></div>
+      </div>
+      <div class="cls-card rev-in">
+        <div class="cls-icon">🧘</div>
+        <div class="cls-provider">Les Mills</div>
+        <div class="cls-name">Body Balance</div>
+        <p class="cls-desc">Yoga, tai chi en pilates gecombineerd. Flexibiliteit, kracht en ontspanning in één les. Alle niveaus.</p>
+        <div class="cls-tags"><span class="cls-tag">Ontspanning</span><span class="cls-tag">Flexibiliteit</span></div>
+      </div>
+      <div class="cls-card rev-in">
+        <div class="cls-icon">🕺</div>
+        <div class="cls-provider">Dans</div>
+        <div class="cls-name">Streetdance</div>
+        <p class="cls-desc">Streetdance voor kinderen van 6–8 jaar en 9–12 jaar. Lekker bewegen op muziek met gelijkgestemden.</p>
+        <div class="cls-tags"><span class="cls-tag">6–12 jaar</span><span class="cls-tag">Dans</span></div>
+      </div>
+      <div class="cls-card rev-in">
+        <div class="cls-icon">🎤</div>
+        <div class="cls-provider">Dans</div>
+        <div class="cls-name">HipHop</div>
+        <p class="cls-desc">HipHop dansen voor tieners en volwassenen (13+). Energie, muziek en creativiteit in een sociale groepsles.</p>
+        <div class="cls-tags"><span class="cls-tag">13+</span><span class="cls-tag">Dans</span></div>
+      </div>
+      <div class="cls-card rev-in">
+        <div class="cls-icon">🧓</div>
+        <div class="cls-provider">Gezondheid</div>
+        <div class="cls-name">Senioren Fit</div>
+        <p class="cls-desc">Bewegingslessen op maat voor 55-plussers. Kracht, balans en mobiliteit op een veilig en fijn tempo.</p>
+        <div class="cls-tags"><span class="cls-tag">55+</span><span class="cls-tag">Low-impact</span></div>
+      </div>
+      <div class="cls-card rev-in">
+        <div class="cls-icon">🌿</div>
+        <div class="cls-provider">Mind &amp; Body</div>
+        <div class="cls-name">Yoga &amp; Yin Yoga</div>
+        <p class="cls-desc">Klassieke yoga en Yin Yoga — voor ontspanning, flexibiliteit en bewustzijn. Ideaal naast intensief sporten.</p>
+        <div class="cls-tags"><span class="cls-tag">Yoga</span><span class="cls-tag">Rustig</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="included">
+  <div class="wrap">
+    <div class="sec-tag">Inbegrepen in lidmaatschap</div>
+    <h2 class="sec-h rev-in">Geen extra kosten.</h2>
+    <div class="inc-inner">
+      <div class="inc-img rev-in">
+        <img src="https://static.wixstatic.com/media/4ea3c4_46d05ea516504dc187dda390d3735ec4~mv2.jpg/v1/fill/w_700,h_520,al_c,q_80,enc_avif,quality_auto/4ea3c4_46d05ea516504dc187dda390d3735ec4~mv2.jpg" alt="Groepslessen" loading="lazy" />
+      </div>
+      <div class="inc-text rev-in">
+        <p>Alle groepslessen bij EasyActive Meppel zijn inbegrepen bij elk lidmaatschap — maandelijks of jaarlijks. Je betaalt niets extra voor een populaire les of een premium format.</p>
+        <div class="inc-points">
+          <div class="inc-pt">Onbeperkt lessen deelnemen</div>
+          <div class="inc-pt">Alle formaten: Les Mills, yoga, dans, senioren</div>
+          <div class="inc-pt">Reserveren via de Sportivity app</div>
+          <div class="inc-pt">Geen extra betaling of leskaart</div>
+          <div class="inc-pt">Eén les per dag? Of drie? Alles mag.</div>
+        </div>
+        <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="../index.html#book" class="btn btn-red">Plan een gratis gesprek →</a>
+          <a href="https://easyactive.nl/aanbod-easyactive/" target="_blank" class="btn btn-ghost">Rooster bekijken</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sub-cta">
+  <div class="wrap">
+    <h2 class="rev-in">Doe een gratis proefles.</h2>
+    <p class="rev-in">Kies een les die jou aanspreekt en ervaar het zelf.</p>
+    <div class="ctas rev-in">
+      <a href="../index.html#book" class="btn btn-red btn-lg">Gratis online gesprek →</a>
+      <a href="../index.html#lidmaatschap" class="btn btn-ghost btn-lg">Bekijk lidmaatschappen</a>
+    </div>
+  </div>
+</div>
+
+<footer class="foot-mini">
+  <div class="wrap">
+    <span>© 2025 EasyActive Meppel · Paradijsweg 8, Meppel · <a href="tel:0522244114">0522 244 114</a></span>
+    <a href="../index.html">← Terug naar de homepage</a>
+  </div>
+</footer>
+<script>
+  const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);} }), {threshold:.08});
+  document.querySelectorAll('.rev-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

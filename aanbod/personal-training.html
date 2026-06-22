@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Training — EasyActive Meppel</title>
+  <meta name="description" content="Personal training bij EasyActive Meppel. 1-op-1 begeleiding, 30Active small group, proefpakket €95 voor 4 sessies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black:#090909; --g900:#111; --g800:#1a1a1a; --g700:#242424; --g200:#999; --g100:#ccc; --white:#fff; --red:#D02828; --redlo:rgba(208,40,40,.1); }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; line-height:1; }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; max-width:100%; }
+    .btn { display:inline-flex; align-items:center; gap:7px; padding:11px 22px; border-radius:4px; font-size:13px; font-weight:700; cursor:pointer; transition:all .18s; border:none; font-family:inherit; }
+    .btn-red { background:var(--red); color:#fff; } .btn-red:hover { background:#b52020; }
+    .btn-ghost { background:transparent; color:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.14); } .btn-ghost:hover { background:rgba(255,255,255,.05); color:#fff; }
+    .btn-lg { padding:14px 30px; font-size:15px; border-radius:5px; }
+    .wrap { max-width:1240px; margin:0 auto; padding:0 48px; }
+    .sec-tag { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--red); margin-bottom:16px; }
+    .sec-tag::before { content:''; width:18px; height:1.5px; background:var(--red); }
+    .sec-h { font-size:clamp(34px,4vw,56px); font-weight:900; letter-spacing:-2px; line-height:1.02; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:300; padding:0 48px; height:68px; display:flex; align-items:center; justify-content:space-between; background:rgba(9,9,9,.94); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.05); }
+    .nav-logo img { height:34px; filter:invert(1); }
+    .nav-links { position:absolute; left:50%; transform:translateX(-50%); display:flex; gap:16px; list-style:none; }
+    .nav-links a { font-size:13px; font-weight:500; color:rgba(255,255,255,.6); transition:color .15s; } .nav-links a:hover { color:#fff; }
+    .nav-actions { display:flex; gap:8px; align-items:center; }
+    .pg-hero { padding:140px 0 80px; position:relative; overflow:hidden; }
+    .pg-hero-bg { position:absolute; inset:0; background:linear-gradient(135deg, rgba(208,40,40,.08) 0%, transparent 50%), linear-gradient(to bottom, var(--g900) 0%, var(--black) 100%); }
+    .pg-hero-content { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .pg-tag { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(208,40,40,.3); background:rgba(208,40,40,.08); color:#e07070; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:20px; }
+    .pg-title { font-size:clamp(44px,6vw,80px); font-weight:900; letter-spacing:-3px; line-height:.95; margin-bottom:18px; }
+    .pg-title em { font-style:normal; color:var(--red); }
+    .pg-sub { font-size:16px; color:var(--g200); line-height:1.7; max-width:460px; margin-bottom:30px; }
+    .pg-hero-img { border-radius:4px; overflow:hidden; }
+    .pg-hero-img img { width:100%; aspect-ratio:4/3; object-fit:cover; filter:brightness(.75) saturate(.85); }
+    /* FORMATS */
+    .formats { padding:80px 0; background:var(--g900); }
+    .fmt-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:44px; }
+    .fmt-card { background:var(--g800); padding:44px 40px; position:relative; }
+    .fmt-card.feat { border:1px solid var(--red); }
+    .fmt-badge { position:absolute; top:20px; right:20px; background:var(--red); color:#fff; font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border-radius:3px; }
+    .fmt-icon { font-size:32px; margin-bottom:16px; }
+    .fmt-card h3 { font-size:24px; font-weight:900; letter-spacing:-.5px; margin-bottom:8px; }
+    .fmt-price { font-size:38px; font-weight:900; letter-spacing:-1.5px; color:var(--red); margin-bottom:4px; }
+    .fmt-price sub { font-size:15px; font-weight:500; color:var(--g200); vertical-align:baseline; }
+    .fmt-period { font-size:12px; color:var(--g200); margin-bottom:20px; }
+    .fmt-ul { list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:28px; }
+    .fmt-ul li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--g100); line-height:1.6; }
+    .fmt-ul li::before { content:'✓'; color:var(--red); font-weight:900; flex-shrink:0; }
+    /* PROCESS */
+    .process { padding:80px 0; background:var(--black); }
+    .proc-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:44px; }
+    .proc-step { background:var(--g900); padding:28px 24px; }
+    .proc-num { font-size:42px; font-weight:900; color:rgba(208,40,40,.15); letter-spacing:-2px; line-height:1; margin-bottom:12px; }
+    .proc-step h3 { font-size:15px; font-weight:800; margin-bottom:8px; }
+    .proc-step p { font-size:13px; color:var(--g200); line-height:1.65; }
+    /* ABOUT 30ACTIVE */
+    .about-30 { padding:80px 0; background:var(--g900); }
+    .a30-inner { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
+    .a30-img img { width:100%; border-radius:4px; filter:brightness(.8) saturate(.85); }
+    .a30-text .sec-sub { font-size:15px; color:var(--g200); line-height:1.75; margin-top:14px; max-width:460px; }
+    .a30-points { margin-top:24px; display:flex; flex-direction:column; gap:12px; }
+    .a30-pt { display:flex; align-items:flex-start; gap:12px; font-size:14px; color:rgba(255,255,255,.85); line-height:1.6; }
+    .a30-pt::before { content:'✓'; color:var(--red); font-weight:900; flex-shrink:0; }
+    .sub-cta { padding:80px 0; background:var(--black); text-align:center; }
+    .sub-cta h2 { font-size:clamp(34px,4vw,52px); font-weight:900; letter-spacing:-2px; margin-bottom:12px; }
+    .sub-cta p { font-size:16px; color:var(--g200); margin-bottom:32px; }
+    .sub-cta .ctas { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+    .foot-mini { background:var(--black); border-top:1px solid rgba(255,255,255,.05); padding:28px 0; }
+    .foot-mini .wrap { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--g200); flex-wrap:wrap; gap:10px; }
+    .foot-mini a { color:var(--g200); } .foot-mini a:hover { color:#fff; }
+    .rev-in { opacity:0; transform:translateY(18px); transition:opacity .5s, transform .5s; }
+    .rev-in.vis { opacity:1; transform:translateY(0); }
+    @media(max-width:900px) { .wrap{padding:0 20px} nav{padding:0 20px} .pg-hero-content{grid-template-columns:1fr} .fmt-grid{grid-template-columns:1fr} .proc-steps{grid-template-columns:1fr 1fr} .a30-inner{grid-template-columns:1fr} }
+    @media(max-width:600px) { .proc-steps{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo"><img src="https://static.wixstatic.com/media/4ea3c4_a9af118e2d174731b91fdeb6dca0a89b~mv2.png" alt="EasyActive Meppel" /></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#aanbod">Aanbod</a></li>
+    <li><a href="../index.html#lessen">Lessen</a></li>
+    <li><a href="../rooster.html">Rooster</a></li>
+    <li><a href="../index.html#lidmaatschap">Lidmaatschap</a></li>
+    <li><a href="../index.html#reviews">Reviews</a></li>
+    <li><a href="../index.html#faq">FAQ</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:0522244114" class="btn btn-ghost">0522 244 114</a>
+    <a href="../index.html#book" class="btn btn-red">Gratis online gesprek →</a>
+  </div>
+</nav>
+
+<section class="pg-hero">
+  <div class="pg-hero-bg"></div>
+  <div class="wrap">
+    <div class="pg-hero-content">
+      <div>
+        <h1 class="pg-title">Personal<br /><em>Training</em></h1>
+        <p class="pg-sub">Geen generiek schema. Geen gedeelde aandacht. Jouw doel, jouw tijdlijn, jouw trainer die je kent en bijstuurt. Of kies 30Active — de kracht van een groep met de precisie van persoonlijke begeleiding.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="../index.html#book" class="btn btn-red btn-lg">Plan een gesprek →</a>
+          <a href="tel:0522244114" class="btn btn-ghost btn-lg">0522 244 114</a>
+        </div>
+      </div>
+      <div class="pg-hero-img rev-in">
+        <img src="https://static.wixstatic.com/media/4ea3c4_d649966bce8b47acbbf83090fe48adfd~mv2.png/v1/fill/w_800,h_600,al_c,q_80,enc_avif,quality_auto/4ea3c4_d649966bce8b47acbbf83090fe48adfd~mv2.png" alt="Personal Training EasyActive Meppel" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="formats">
+  <div class="wrap">
+    <div class="sec-tag">Formats</div>
+    <h2 class="sec-h rev-in">Kies jouw format.</h2>
+    <div class="fmt-grid">
+      <div class="fmt-card rev-in">
+        <div class="fmt-icon">🎯</div>
+        <h3>Personal Training</h3>
+        <div class="fmt-price">€95 <sub>/ 4 sessies</sub></div>
+        <div class="fmt-period">Proefpakket 1-op-1 · Daarna in overleg</div>
+        <ul class="fmt-ul">
+          <li>4× individuele trainingen</li>
+          <li>Persoonlijk trainingsschema</li>
+          <li>Techniek, correctie en veiligheid</li>
+          <li>Voedings- en leefstijladvies</li>
+          <li>Progress tracking per sessie</li>
+        </ul>
+        <a href="../index.html#book" class="btn btn-ghost" style="width:100%;justify-content:center">Plan een gesprek</a>
+      </div>
+      <div class="fmt-card feat rev-in">
+        <div class="fmt-badge">Populaire keuze</div>
+        <div class="fmt-icon">👥</div>
+        <h3>30Active</h3>
+        <div class="fmt-price" style="font-size:26px;color:var(--g100)">Prijs op aanvraag</div>
+        <div class="fmt-period">Small group · 2–4 personen · 30 min</div>
+        <ul class="fmt-ul">
+          <li>Kleine groep — aandacht op jou</li>
+          <li>Intensieve 30-minuten sessies</li>
+          <li>Samentraining: goedkoper dan 1-op-1</li>
+          <li>Persoonlijk schema per deelnemer</li>
+          <li>Motivatie door groepsdynamiek</li>
+          <li>Inbegrepen: voedingsbegeleiding</li>
+        </ul>
+        <a href="../index.html#book" class="btn btn-red" style="width:100%;justify-content:center">Plan een gesprek →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="wrap">
+    <div class="sec-tag">Aanpak</div>
+    <h2 class="sec-h rev-in">Zo beginnen we.</h2>
+    <div class="proc-steps">
+      <div class="proc-step rev-in">
+        <div class="proc-num">01</div>
+        <h3>Gratis gesprek</h3>
+        <p>We praten over je doel, je leven en wat je verwacht. Geen verplichtingen — maar wel een helder startpunt.</p>
+      </div>
+      <div class="proc-step rev-in">
+        <div class="proc-num">02</div>
+        <h3>Meting &amp; intake</h3>
+        <p>Conditie, kracht en lichaamsmeting als nulmeting. Zo zien we later precies hoe ver je gekomen bent.</p>
+      </div>
+      <div class="proc-step rev-in">
+        <div class="proc-num">03</div>
+        <h3>Jouw schema</h3>
+        <p>We bouwen een programma dat past bij jou — niet een generieke template. Trainingsdagen, intensiteit, voeding.</p>
+      </div>
+      <div class="proc-step rev-in">
+        <div class="proc-num">04</div>
+        <h3>Trainen &amp; bijsturen</h3>
+        <p>Elke sessie wordt bijgehouden. We sturen bij als het niet werkt. Geen vaste kaders — alleen resultaat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-30">
+  <div class="wrap">
+    <div class="a30-inner">
+      <div class="a30-img rev-in">
+        <img src="https://static.wixstatic.com/media/4ea3c4_d649966bce8b47acbbf83090fe48adfd~mv2.png/v1/fill/w_700,h_520,al_c,q_80,enc_avif,quality_auto/4ea3c4_d649966bce8b47acbbf83090fe48adfd~mv2.png" alt="30Active training" loading="lazy" />
+      </div>
+      <div class="a30-text rev-in">
+        <div class="sec-tag">30Active</div>
+        <h2 class="sec-h">The best of<br />both worlds.</h2>
+        <p class="sec-sub">30Active combineert de precisie van personal training met de betaalbaarheid en energie van samentrainen. Maximaal 4 personen per sessie — je trainer kent jou bij naam.</p>
+        <div class="a30-points">
+          <div class="a30-pt">Betaalbaarder dan 1-op-1 personal training</div>
+          <div class="a30-pt">Groepsenergie als motivatiefactor</div>
+          <div class="a30-pt">Toch individuele aandacht per deelnemer</div>
+          <div class="a30-pt">30 minuten — hoog tempo, geen filler</div>
+          <div class="a30-pt">Voedingsbegeleiding inbegrepen</div>
+        </div>
+        <a href="../index.html#book" style="margin-top:28px" class="btn btn-red">Gratis online gesprek →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sub-cta">
+  <div class="wrap">
+    <h2 class="rev-in">Klaar voor serieuze begeleiding?</h2>
+    <p class="rev-in">Plan een gratis kennismaking en kijk welk format bij jou past.</p>
+    <div class="ctas rev-in">
+      <a href="../index.html#book" class="btn btn-red btn-lg">Gratis online gesprek →</a>
+      <a href="../index.html#lidmaatschap" class="btn btn-ghost btn-lg">Bekijk lidmaatschappen</a>
+    </div>
+  </div>
+</div>
+
+<footer class="foot-mini">
+  <div class="wrap">
+    <span>© 2025 EasyActive Meppel · Paradijsweg 8, Meppel · <a href="tel:0522244114">0522 244 114</a></span>
+    <a href="../index.html">← Terug naar de homepage</a>
+  </div>
+</footer>
+<script>
+  const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);} }), {threshold:.08});
+  document.querySelectorAll('.rev-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
